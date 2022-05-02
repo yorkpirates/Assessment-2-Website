@@ -1,0 +1,258 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > College</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/highlight-idea.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.pack.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.mygdx.game.Entitys</a>
+</div>
+
+<h1>Coverage Summary for Class: College (com.mygdx.game.Entitys)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">College</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    75%
+  </span>
+  <span class="absValue">
+    (6/8)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    85.5%
+  </span>
+  <span class="absValue">
+    (53/62)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;package com.mygdx.game.Entitys;
+<i class="no-highlight">2</i>&nbsp;
+<i class="no-highlight">3</i>&nbsp;import com.badlogic.gdx.Game;
+<i class="no-highlight">4</i>&nbsp;import com.badlogic.gdx.math.Vector2;
+<i class="no-highlight">5</i>&nbsp;import com.badlogic.gdx.utils.JsonValue;
+<i class="no-highlight">6</i>&nbsp;import com.mygdx.game.Components.Pirate;
+<i class="no-highlight">7</i>&nbsp;import com.mygdx.game.Components.Transform;
+<i class="no-highlight">8</i>&nbsp;import com.mygdx.game.Faction;
+<i class="no-highlight">9</i>&nbsp;import com.mygdx.game.Managers.GameManager;
+<i class="no-highlight">10</i>&nbsp;import com.mygdx.utils.Utilities;
+<i class="no-highlight">11</i>&nbsp;
+<i class="no-highlight">12</i>&nbsp;import java.util.ArrayList;
+<i class="no-highlight">13</i>&nbsp;
+<i class="no-highlight">14</i>&nbsp;/**
+<i class="no-highlight">15</i>&nbsp; * Defines a college and its associated buildings.
+<i class="no-highlight">16</i>&nbsp; */
+<i class="no-highlight">17</i>&nbsp;public class College extends Entity {
+<i class="no-highlight">18</i>&nbsp;    private static ArrayList&lt;String&gt; buildingNames;
+<i class="no-highlight">19</i>&nbsp;    private final ArrayList&lt;Building&gt; buildings;
+<i class="no-highlight">20</i>&nbsp;    private int i;
+<i class="no-highlight">21</i>&nbsp;    private Vector2 target;
+<i class="no-highlight">22</i>&nbsp;
+<i class="no-highlight">23</i>&nbsp;    private boolean active;
+<i class="no-highlight">24</i>&nbsp;
+<i class="no-highlight">25</i>&nbsp;    public College() {
+<b class="fc"><i class="no-highlight">26</i>&nbsp;        super();</b>
+<b class="fc"><i class="no-highlight">27</i>&nbsp;        buildings = new ArrayList&lt;&gt;();</b>
+<b class="fc"><i class="no-highlight">28</i>&nbsp;        buildingNames = new ArrayList&lt;&gt;();</b>
+<b class="fc"><i class="no-highlight">29</i>&nbsp;        buildingNames.add(&quot;big&quot;);</b>
+<b class="fc"><i class="no-highlight">30</i>&nbsp;        buildingNames.add(&quot;small&quot;);</b>
+<b class="fc"><i class="no-highlight">31</i>&nbsp;        buildingNames.add(&quot;clock&quot;);</b>
+<b class="fc"><i class="no-highlight">32</i>&nbsp;        i = 0;</b>
+<b class="fc"><i class="no-highlight">33</i>&nbsp;        Transform t = new Transform();</b>
+<b class="fc"><i class="no-highlight">34</i>&nbsp;        Pirate p = new Pirate();</b>
+<b class="fc"><i class="no-highlight">35</i>&nbsp;        addComponents(t, p);</b>
+<b class="fc"><i class="no-highlight">36</i>&nbsp;        active = true;</b>
+<i class="no-highlight">37</i>&nbsp;    }
+<i class="no-highlight">38</i>&nbsp;
+<i class="no-highlight">39</i>&nbsp;    /**
+<i class="no-highlight">40</i>&nbsp;     * Creates a college at the location associated with the given faction id.
+<i class="no-highlight">41</i>&nbsp;     *
+<i class="no-highlight">42</i>&nbsp;     * @param factionId numerical id of the faction
+<i class="no-highlight">43</i>&nbsp;     */
+<i class="no-highlight">44</i>&nbsp;    public College(int factionId) {
+<b class="fc"><i class="no-highlight">45</i>&nbsp;        this();</b>
+<b class="fc"><i class="no-highlight">46</i>&nbsp;        Faction f = GameManager.getFaction(factionId);</b>
+<b class="fc"><i class="no-highlight">47</i>&nbsp;        Transform t = getComponent(Transform.class);</b>
+<b class="fc"><i class="no-highlight">48</i>&nbsp;        t.setPosition(f.getPosition());</b>
+<b class="fc"><i class="no-highlight">49</i>&nbsp;        Pirate p = getComponent(Pirate.class);</b>
+<b class="fc"><i class="no-highlight">50</i>&nbsp;        p.setFactionId(factionId);</b>
+<b class="fc"><i class="no-highlight">51</i>&nbsp;        spawn(f.getColour());</b>
+<i class="no-highlight">52</i>&nbsp;    }
+<i class="no-highlight">53</i>&nbsp;
+<i class="no-highlight">54</i>&nbsp;    /**
+<i class="no-highlight">55</i>&nbsp;     * Randomly populates the college radius with buildings.
+<i class="no-highlight">56</i>&nbsp;     *
+<i class="no-highlight">57</i>&nbsp;     * @param colour used to pull the appropriate flag sprite
+<i class="no-highlight">58</i>&nbsp;     */
+<i class="no-highlight">59</i>&nbsp;    private void spawn(String colour) {
+<b class="fc"><i class="no-highlight">60</i>&nbsp;        JsonValue collegeSettings = GameManager.getSettings().get(&quot;college&quot;);</b>
+<b class="fc"><i class="no-highlight">61</i>&nbsp;        float radius = collegeSettings.getFloat(&quot;spawnRadius&quot;);</b>
+<i class="no-highlight">62</i>&nbsp;        // radius = Utilities.tilesToDistance(radius) * BUILDING_SCALE;
+<b class="fc"><i class="no-highlight">63</i>&nbsp;        final Vector2 origin = getComponent(Transform.class).getPosition();</b>
+<b class="fc"><i class="no-highlight">64</i>&nbsp;        ArrayList&lt;Vector2&gt; posList = new ArrayList&lt;&gt;();</b>
+<b class="fc"><i class="no-highlight">65</i>&nbsp;        posList.add(new Vector2(0, 0));</b>
+<i class="no-highlight">66</i>&nbsp;
+<b class="fc"><i class="no-highlight">67</i>&nbsp;        for (int i = 0; i &lt; collegeSettings.getInt(&quot;numBuildings&quot;); i++) {</b>
+<b class="fc"><i class="no-highlight">68</i>&nbsp;            Vector2 pos = Utilities.randomPos(-radius, radius);</b>
+<b class="fc"><i class="no-highlight">69</i>&nbsp;            pos = Utilities.floor(pos);</b>
+<i class="no-highlight">70</i>&nbsp;
+<b class="fc"><i class="no-highlight">71</i>&nbsp;            if (!posList.contains(pos)) {</b>
+<b class="fc"><i class="no-highlight">72</i>&nbsp;                posList.add(pos);</b>
+<i class="no-highlight">73</i>&nbsp;
+<b class="fc"><i class="no-highlight">74</i>&nbsp;                pos = Utilities.tilesToDistance(pos).add(origin);</b>
+<i class="no-highlight">75</i>&nbsp;
+<b class="fc"><i class="no-highlight">76</i>&nbsp;                Building b = new Building();</b>
+<b class="fc"><i class="no-highlight">77</i>&nbsp;                buildings.add(b);</b>
+<i class="no-highlight">78</i>&nbsp;
+<b class="fc"><i class="no-highlight">79</i>&nbsp;                String b_name = Utilities.randomChoice(buildingNames, 0);</b>
+<i class="no-highlight">80</i>&nbsp;
+<b class="fc"><i class="no-highlight">81</i>&nbsp;                b.create(pos, b_name);</b>
+<i class="no-highlight">82</i>&nbsp;            }
+<i class="no-highlight">83</i>&nbsp;
+<i class="no-highlight">84</i>&nbsp;
+<i class="no-highlight">85</i>&nbsp;        }
+<b class="fc"><i class="no-highlight">86</i>&nbsp;        Building flag = new Building(true);</b>
+<b class="fc"><i class="no-highlight">87</i>&nbsp;        buildings.add(flag);</b>
+<b class="fc"><i class="no-highlight">88</i>&nbsp;        flag.create(origin, colour);</b>
+<i class="no-highlight">89</i>&nbsp;    }
+<i class="no-highlight">90</i>&nbsp;
+<i class="no-highlight">91</i>&nbsp;    /**
+<i class="no-highlight">92</i>&nbsp;     * True as long as unharmed buildings remain, false otherwise.
+<i class="no-highlight">93</i>&nbsp;     */
+<i class="no-highlight">94</i>&nbsp;    public boolean isAlive() {
+<b class="fc"><i class="no-highlight">95</i>&nbsp;        boolean res = false;</b>
+<b class="fc"><i class="no-highlight">96</i>&nbsp;        for (int i = 0; i &lt; buildings.size() - 1; i++) {</b>
+<b class="fc"><i class="no-highlight">97</i>&nbsp;            Building b = buildings.get(i);</b>
+<b class="fc"><i class="no-highlight">98</i>&nbsp;            if (b.isAlive()) {</b>
+<b class="fc"><i class="no-highlight">99</i>&nbsp;                res = true;</b>
+<i class="no-highlight">100</i>&nbsp;            }
+<i class="no-highlight">101</i>&nbsp;        }
+<b class="fc"><i class="no-highlight">102</i>&nbsp;        if (!res) {</b>
+<b class="fc"><i class="no-highlight">103</i>&nbsp;            if(getComponent(Pirate.class).isAlive()){</b>
+<b class="fc"><i class="no-highlight">104</i>&nbsp;                GameManager.getPlayer().getComponent(Pirate.class).addPoints(10000);</b>
+<b class="fc"><i class="no-highlight">105</i>&nbsp;                GameManager.getPlayer().getComponent(Pirate.class).addPlunder(1000);</b>
+<b class="fc"><i class="no-highlight">106</i>&nbsp;                active = false;</b>
+<i class="no-highlight">107</i>&nbsp;            }
+<b class="fc"><i class="no-highlight">108</i>&nbsp;            getComponent(Pirate.class).kill();</b>
+<i class="no-highlight">109</i>&nbsp;
+<i class="no-highlight">110</i>&nbsp;
+<i class="no-highlight">111</i>&nbsp;        }
+<b class="fc"><i class="no-highlight">112</i>&nbsp;        return res;</b>
+<i class="no-highlight">113</i>&nbsp;    }
+<i class="no-highlight">114</i>&nbsp;
+<i class="no-highlight">115</i>&nbsp;    /**
+<i class="no-highlight">116</i>&nbsp;     * Can be called to kill a college and all of its buildings
+<i class="no-highlight">117</i>&nbsp;     */
+<i class="no-highlight">118</i>&nbsp;    public void kill(){
+<b class="fc"><i class="no-highlight">119</i>&nbsp;        for (int i = 0; i &lt; buildings.size() - 1; i++) {</b>
+<b class="fc"><i class="no-highlight">120</i>&nbsp;            Building b = buildings.get(i);</b>
+<b class="fc"><i class="no-highlight">121</i>&nbsp;            b.destroy();</b>
+<i class="no-highlight">122</i>&nbsp;        }
+<b class="fc"><i class="no-highlight">123</i>&nbsp;        active = false;</b>
+<i class="no-highlight">124</i>&nbsp;
+<i class="no-highlight">125</i>&nbsp;    }
+<i class="no-highlight">126</i>&nbsp;
+<i class="no-highlight">127</i>&nbsp;
+<i class="no-highlight">128</i>&nbsp;    public void shoot(Vector2 target) {
+<b class="nc"><i class="no-highlight">129</i>&nbsp;        GameManager.shoot2(this, target);</b>
+<i class="no-highlight">130</i>&nbsp;    }
+<i class="no-highlight">131</i>&nbsp;
+<i class="no-highlight">132</i>&nbsp;    public Vector2 getPosition() {
+<b class="fc"><i class="no-highlight">133</i>&nbsp;        return getComponent(Transform.class).getPosition().cpy();</b>
+<i class="no-highlight">134</i>&nbsp;    }
+<i class="no-highlight">135</i>&nbsp;
+<i class="no-highlight">136</i>&nbsp;    @Override
+<i class="no-highlight">137</i>&nbsp;    public void update() {
+<b class="nc"><i class="no-highlight">138</i>&nbsp;        super.update();</b>
+<b class="nc"><i class="no-highlight">139</i>&nbsp;        isAlive();</b>
+<i class="no-highlight">140</i>&nbsp;
+<b class="nc"><i class="no-highlight">141</i>&nbsp;        if(active){</b>
+<b class="nc"><i class="no-highlight">142</i>&nbsp;            if (i == 50) {</b>
+<b class="nc"><i class="no-highlight">143</i>&nbsp;                target = new Vector2(-1 * (this.getPosition().x - GameManager.ships.get(0).getPosition().x), -1 * (this.getPosition().y - GameManager.ships.get(0).getPosition().y));</b>
+<b class="nc"><i class="no-highlight">144</i>&nbsp;                shoot(target);</b>
+<b class="nc"><i class="no-highlight">145</i>&nbsp;                i = 0;</b>
+<i class="no-highlight">146</i>&nbsp;            }
+<b class="nc"><i class="no-highlight">147</i>&nbsp;            i++;</b>
+<i class="no-highlight">148</i>&nbsp;
+<i class="no-highlight">149</i>&nbsp;        }
+<i class="no-highlight">150</i>&nbsp;
+<i class="no-highlight">151</i>&nbsp;    }
+<i class="no-highlight">152</i>&nbsp;
+<i class="no-highlight">153</i>&nbsp;}
+</div>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+        var codeBlock = document.getElementById('sourceCode');
+
+        if (codeBlock) {
+            hljs.highlightBlock(codeBlock);
+        }
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2022-05-01 15:41</div>
+</div>
+</body>
+</html>

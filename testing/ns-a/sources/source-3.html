@@ -1,0 +1,427 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > SaveObject</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/highlight-idea.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.pack.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.mygdx.utils</a>
+</div>
+
+<h1>Coverage Summary for Class: SaveObject (com.mygdx.utils)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">SaveObject</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    90%
+  </span>
+  <span class="absValue">
+    (9/10)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    90.2%
+  </span>
+  <span class="absValue">
+    (129/143)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;package com.mygdx.utils;
+<i class="no-highlight">2</i>&nbsp;
+<i class="no-highlight">3</i>&nbsp;import com.badlogic.gdx.Game;
+<i class="no-highlight">4</i>&nbsp;import com.mygdx.game.Components.Pirate;
+<i class="no-highlight">5</i>&nbsp;import com.mygdx.game.Entitys.College;
+<i class="no-highlight">6</i>&nbsp;import com.mygdx.game.Entitys.Player;
+<i class="no-highlight">7</i>&nbsp;import com.mygdx.game.Entitys.Ship;
+<i class="no-highlight">8</i>&nbsp;import com.mygdx.game.Managers.GameManager;
+<i class="no-highlight">9</i>&nbsp;import com.sun.org.apache.xpath.internal.operations.Bool;
+<i class="no-highlight">10</i>&nbsp;
+<i class="no-highlight">11</i>&nbsp;import javax.xml.stream.*;
+<i class="no-highlight">12</i>&nbsp;import javax.xml.stream.events.Characters;
+<i class="no-highlight">13</i>&nbsp;import javax.xml.stream.events.StartElement;
+<i class="no-highlight">14</i>&nbsp;import javax.xml.stream.events.XMLEvent;
+<i class="no-highlight">15</i>&nbsp;import java.io.*;
+<i class="no-highlight">16</i>&nbsp;
+<b class="nc"><i class="no-highlight">17</i>&nbsp;public final class SaveObject  {</b>
+<i class="no-highlight">18</i>&nbsp;    /**
+<i class="no-highlight">19</i>&nbsp;     * This classes job is to hold all the data needed to reconstruct the game state
+<i class="no-highlight">20</i>&nbsp;     * Its the object that will be written using serilisation to a file
+<i class="no-highlight">21</i>&nbsp;     */
+<i class="no-highlight">22</i>&nbsp;
+<i class="no-highlight">23</i>&nbsp;    //uses STAX parser
+<i class="no-highlight">24</i>&nbsp;
+<i class="no-highlight">25</i>&nbsp;    /**
+<i class="no-highlight">26</i>&nbsp;     * A method which saves the Game to XML using a STAX parser
+<i class="no-highlight">27</i>&nbsp;     *
+<i class="no-highlight">28</i>&nbsp;     * @param path The path to where the file will be saved
+<i class="no-highlight">29</i>&nbsp;     */
+<i class="no-highlight">30</i>&nbsp;    public static void writeXMl(String path){
+<i class="no-highlight">31</i>&nbsp;
+<i class="no-highlight">32</i>&nbsp;        try{
+<i class="no-highlight">33</i>&nbsp;            //setUP outputs
+<b class="fc"><i class="no-highlight">34</i>&nbsp;            StringWriter stringWriter = new StringWriter();</b>
+<b class="fc"><i class="no-highlight">35</i>&nbsp;            XMLOutputFactory xMLOutputFactory = XMLOutputFactory.newInstance();</b>
+<b class="fc"><i class="no-highlight">36</i>&nbsp;            XMLStreamWriter xMLStreamWriter =</b>
+<b class="fc"><i class="no-highlight">37</i>&nbsp;                    xMLOutputFactory.createXMLStreamWriter(new FileOutputStream(path));</b>
+<i class="no-highlight">38</i>&nbsp;            //write the xml
+<b class="fc"><i class="no-highlight">39</i>&nbsp;            xMLStreamWriter.writeStartDocument();</b>
+<b class="fc"><i class="no-highlight">40</i>&nbsp;            xMLStreamWriter.writeStartElement(&quot;SAVE&quot;);</b>
+<i class="no-highlight">41</i>&nbsp;
+<i class="no-highlight">42</i>&nbsp;            //write all the ships
+<b class="fc"><i class="no-highlight">43</i>&nbsp;            xMLStreamWriter.writeStartElement(&quot;Ships&quot;);</b>
+<b class="fc"><i class="no-highlight">44</i>&nbsp;            xMLStreamWriter.writeAttribute(&quot;Number&quot;, &quot;value&quot;);</b>
+<b class="fc"><i class="no-highlight">45</i>&nbsp;            int i =0;</b>
+<b class="fc"><i class="no-highlight">46</i>&nbsp;            for(Ship s : GameManager.ships){</b>
+<b class="fc"><i class="no-highlight">47</i>&nbsp;                writeShiptoXML(xMLStreamWriter,s,i);</b>
+<b class="fc"><i class="no-highlight">48</i>&nbsp;                i = i +1;</b>
+<i class="no-highlight">49</i>&nbsp;
+<b class="fc"><i class="no-highlight">50</i>&nbsp;            }</b>
+<b class="fc"><i class="no-highlight">51</i>&nbsp;            i=0;</b>
+<b class="fc"><i class="no-highlight">52</i>&nbsp;            xMLStreamWriter.writeEndElement();</b>
+<b class="fc"><i class="no-highlight">53</i>&nbsp;            for(College c : GameManager.colleges){</b>
+<b class="fc"><i class="no-highlight">54</i>&nbsp;                writeCollegeToXML(xMLStreamWriter,c,i);</b>
+<b class="fc"><i class="no-highlight">55</i>&nbsp;                i = i +1;</b>
+<b class="fc"><i class="no-highlight">56</i>&nbsp;            }</b>
+<i class="no-highlight">57</i>&nbsp;            //write the game data
+<b class="fc"><i class="no-highlight">58</i>&nbsp;            Player p = GameManager.getPlayer();</b>
+<b class="fc"><i class="no-highlight">59</i>&nbsp;            writeGamedatatoXML(xMLStreamWriter,p);</b>
+<i class="no-highlight">60</i>&nbsp;
+<i class="no-highlight">61</i>&nbsp;
+<i class="no-highlight">62</i>&nbsp;
+<b class="fc"><i class="no-highlight">63</i>&nbsp;            xMLStreamWriter.writeEndElement();</b>
+<b class="fc"><i class="no-highlight">64</i>&nbsp;            xMLStreamWriter.writeEndDocument();</b>
+<i class="no-highlight">65</i>&nbsp;
+<b class="fc"><i class="no-highlight">66</i>&nbsp;            xMLStreamWriter.flush();</b>
+<b class="fc"><i class="no-highlight">67</i>&nbsp;            xMLStreamWriter.close();</b>
+<i class="no-highlight">68</i>&nbsp;            //String xmlString = stringWriter.getBuffer().toString();
+<i class="no-highlight">69</i>&nbsp;
+<b class="fc"><i class="no-highlight">70</i>&nbsp;            stringWriter.close();</b>
+<i class="no-highlight">71</i>&nbsp;            //System.out.println(xmlString);
+<b class="nc"><i class="no-highlight">72</i>&nbsp;        } catch (XMLStreamException e) {</b>
+<b class="nc"><i class="no-highlight">73</i>&nbsp;            e.printStackTrace();</b>
+<b class="nc"><i class="no-highlight">74</i>&nbsp;        } catch (IOException e) {</b>
+<b class="nc"><i class="no-highlight">75</i>&nbsp;            e.printStackTrace();</b>
+<b class="fc"><i class="no-highlight">76</i>&nbsp;        }</b>
+<i class="no-highlight">77</i>&nbsp;
+<i class="no-highlight">78</i>&nbsp;    }
+<i class="no-highlight">79</i>&nbsp;
+<i class="no-highlight">80</i>&nbsp;    /**
+<i class="no-highlight">81</i>&nbsp;     * Takes the  Ship and writes it to XML
+<i class="no-highlight">82</i>&nbsp;     *
+<i class="no-highlight">83</i>&nbsp;     * @param xmlDoc The Document which is being written to
+<i class="no-highlight">84</i>&nbsp;     * @param ship  The Ship object which we want to save in XML
+<i class="no-highlight">85</i>&nbsp;     * @param index The index of the ship
+<i class="no-highlight">86</i>&nbsp;     * @throws XMLStreamException
+<i class="no-highlight">87</i>&nbsp;     */
+<i class="no-highlight">88</i>&nbsp;    private static void writeShiptoXML(XMLStreamWriter xmlDoc,Ship ship,int index) throws XMLStreamException {
+<b class="fc"><i class="no-highlight">89</i>&nbsp;        xmlDoc.writeStartElement(&quot;position&quot;);</b>
+<i class="no-highlight">90</i>&nbsp;
+<b class="fc"><i class="no-highlight">91</i>&nbsp;        xmlDoc.writeStartElement(&quot;X&quot;);</b>
+<b class="fc"><i class="no-highlight">92</i>&nbsp;        xmlDoc.writeCharacters(String.valueOf(ship.getPosition().x));</b>
+<b class="fc"><i class="no-highlight">93</i>&nbsp;        xmlDoc.writeEndElement();</b>
+<i class="no-highlight">94</i>&nbsp;
+<b class="fc"><i class="no-highlight">95</i>&nbsp;        xmlDoc.writeStartElement(&quot;Y&quot;);</b>
+<b class="fc"><i class="no-highlight">96</i>&nbsp;        xmlDoc.writeCharacters(String.valueOf(ship.getPosition().y));</b>
+<b class="fc"><i class="no-highlight">97</i>&nbsp;        xmlDoc.writeEndElement();</b>
+<i class="no-highlight">98</i>&nbsp;
+<b class="fc"><i class="no-highlight">99</i>&nbsp;        xmlDoc.writeStartElement(&quot;Index&quot;);</b>
+<b class="fc"><i class="no-highlight">100</i>&nbsp;        xmlDoc.writeCharacters(String.valueOf(index));</b>
+<b class="fc"><i class="no-highlight">101</i>&nbsp;        xmlDoc.writeEndElement();</b>
+<i class="no-highlight">102</i>&nbsp;
+<b class="fc"><i class="no-highlight">103</i>&nbsp;        xmlDoc.writeStartElement(&quot;Health&quot;);</b>
+<b class="fc"><i class="no-highlight">104</i>&nbsp;        xmlDoc.writeCharacters(String.valueOf(ship.getHealth()));</b>
+<b class="fc"><i class="no-highlight">105</i>&nbsp;        xmlDoc.writeEndElement();</b>
+<i class="no-highlight">106</i>&nbsp;
+<b class="fc"><i class="no-highlight">107</i>&nbsp;        xmlDoc.writeEndElement();</b>
+<i class="no-highlight">108</i>&nbsp;    }
+<i class="no-highlight">109</i>&nbsp;
+<i class="no-highlight">110</i>&nbsp;    /**
+<i class="no-highlight">111</i>&nbsp;     *
+<i class="no-highlight">112</i>&nbsp;     * @param xmlDoc The Document which is being written to
+<i class="no-highlight">113</i>&nbsp;     * @param college The college to write to XMl
+<i class="no-highlight">114</i>&nbsp;     * @param index The index of the college in relation to Gamemanager
+<i class="no-highlight">115</i>&nbsp;     * @throws XMLStreamException
+<i class="no-highlight">116</i>&nbsp;     */
+<i class="no-highlight">117</i>&nbsp;    private static void writeCollegeToXML(XMLStreamWriter xmlDoc, College college,int index) throws XMLStreamException{
+<b class="fc"><i class="no-highlight">118</i>&nbsp;        xmlDoc.writeStartElement(&quot;College&quot;);</b>
+<i class="no-highlight">119</i>&nbsp;
+<b class="fc"><i class="no-highlight">120</i>&nbsp;        xmlDoc.writeStartElement(&quot;Name&quot;);</b>
+<b class="fc"><i class="no-highlight">121</i>&nbsp;        xmlDoc.writeCharacters(String.valueOf(college.getName()));</b>
+<b class="fc"><i class="no-highlight">122</i>&nbsp;        xmlDoc.writeEndElement();</b>
+<i class="no-highlight">123</i>&nbsp;
+<b class="fc"><i class="no-highlight">124</i>&nbsp;        xmlDoc.writeStartElement(&quot;Alive&quot;);</b>
+<b class="fc"><i class="no-highlight">125</i>&nbsp;        xmlDoc.writeCharacters(String.valueOf(college.isAlive()));</b>
+<b class="fc"><i class="no-highlight">126</i>&nbsp;        xmlDoc.writeEndElement();</b>
+<i class="no-highlight">127</i>&nbsp;
+<b class="fc"><i class="no-highlight">128</i>&nbsp;        xmlDoc.writeStartElement(&quot;Index&quot;);</b>
+<b class="fc"><i class="no-highlight">129</i>&nbsp;        xmlDoc.writeCharacters(String.valueOf(index));</b>
+<b class="fc"><i class="no-highlight">130</i>&nbsp;        xmlDoc.writeEndElement();</b>
+<i class="no-highlight">131</i>&nbsp;
+<b class="fc"><i class="no-highlight">132</i>&nbsp;        xmlDoc.writeEndElement();</b>
+<i class="no-highlight">133</i>&nbsp;
+<i class="no-highlight">134</i>&nbsp;    }
+<i class="no-highlight">135</i>&nbsp;
+<i class="no-highlight">136</i>&nbsp;    /**
+<i class="no-highlight">137</i>&nbsp;     * Method that writes game data to XML
+<i class="no-highlight">138</i>&nbsp;     *
+<i class="no-highlight">139</i>&nbsp;     * @param xmlDoc The Document which is being written to
+<i class="no-highlight">140</i>&nbsp;     * @param player The player Object which contains the data we wish to write
+<i class="no-highlight">141</i>&nbsp;     * @throws XMLStreamException
+<i class="no-highlight">142</i>&nbsp;     */
+<i class="no-highlight">143</i>&nbsp;    private static void writeGamedatatoXML(XMLStreamWriter xmlDoc,Player player) throws XMLStreamException{
+<b class="fc"><i class="no-highlight">144</i>&nbsp;        xmlDoc.writeStartElement(&quot;GAMEDATA&quot;);</b>
+<i class="no-highlight">145</i>&nbsp;
+<b class="fc"><i class="no-highlight">146</i>&nbsp;        xmlDoc.writeStartElement(&quot;Ammo&quot;);</b>
+<b class="fc"><i class="no-highlight">147</i>&nbsp;        xmlDoc.writeCharacters(String.valueOf(player.getAmmo()));</b>
+<b class="fc"><i class="no-highlight">148</i>&nbsp;        xmlDoc.writeEndElement();</b>
+<i class="no-highlight">149</i>&nbsp;
+<b class="fc"><i class="no-highlight">150</i>&nbsp;        xmlDoc.writeStartElement(&quot;Plunder&quot;);</b>
+<b class="fc"><i class="no-highlight">151</i>&nbsp;        xmlDoc.writeCharacters(String.valueOf(player.getPlunder()));</b>
+<b class="fc"><i class="no-highlight">152</i>&nbsp;        xmlDoc.writeEndElement();</b>
+<i class="no-highlight">153</i>&nbsp;
+<b class="fc"><i class="no-highlight">154</i>&nbsp;        xmlDoc.writeStartElement(&quot;Points&quot;);</b>
+<b class="fc"><i class="no-highlight">155</i>&nbsp;        xmlDoc.writeCharacters(String.valueOf(player.getComponent(Pirate.class).getPoints()));</b>
+<b class="fc"><i class="no-highlight">156</i>&nbsp;        xmlDoc.writeEndElement();</b>
+<i class="no-highlight">157</i>&nbsp;
+<i class="no-highlight">158</i>&nbsp;
+<b class="fc"><i class="no-highlight">159</i>&nbsp;        xmlDoc.writeEndElement();</b>
+<i class="no-highlight">160</i>&nbsp;    }
+<i class="no-highlight">161</i>&nbsp;
+<i class="no-highlight">162</i>&nbsp;    /**
+<i class="no-highlight">163</i>&nbsp;     * Loads a saved game which is an XML file 
+<i class="no-highlight">164</i>&nbsp;     *
+<i class="no-highlight">165</i>&nbsp;     * @param path the path to the XML file that the method will load
+<i class="no-highlight">166</i>&nbsp;     */
+<i class="no-highlight">167</i>&nbsp;    public static void readXML(String path){
+<i class="no-highlight">168</i>&nbsp;        try{
+<b class="fc"><i class="no-highlight">169</i>&nbsp;            XMLInputFactory factory = XMLInputFactory.newInstance();</b>
+<b class="fc"><i class="no-highlight">170</i>&nbsp;            XMLEventReader eventReader =</b>
+<b class="fc"><i class="no-highlight">171</i>&nbsp;                    factory.createXMLEventReader(new FileReader(path));</b>
+<i class="no-highlight">172</i>&nbsp;
+<b class="fc"><i class="no-highlight">173</i>&nbsp;            while(eventReader.hasNext()) {</b>
+<b class="fc"><i class="no-highlight">174</i>&nbsp;                XMLEvent event = eventReader.nextEvent();</b>
+<i class="no-highlight">175</i>&nbsp;
+<b class="fc"><i class="no-highlight">176</i>&nbsp;                    switch (event.getEventType()){</b>
+<i class="no-highlight">177</i>&nbsp;
+<i class="no-highlight">178</i>&nbsp;                        case XMLStreamConstants.START_ELEMENT:
+<b class="fc"><i class="no-highlight">179</i>&nbsp;                            StartElement startElement = event.asStartElement();</b>
+<b class="fc"><i class="no-highlight">180</i>&nbsp;                            String qName = startElement.getName().getLocalPart();</b>
+<i class="no-highlight">181</i>&nbsp;
+<b class="fc"><i class="no-highlight">182</i>&nbsp;                            if(qName.equalsIgnoreCase(&quot;ships&quot;)){</b>
+<i class="no-highlight">183</i>&nbsp;
+<i class="no-highlight">184</i>&nbsp;                            }
+<b class="fc"><i class="no-highlight">185</i>&nbsp;                            else if(qName.equalsIgnoreCase(&quot;position&quot;)){</b>
+<b class="fc"><i class="no-highlight">186</i>&nbsp;                                placeShip(eventReader);</b>
+<i class="no-highlight">187</i>&nbsp;                            }
+<b class="fc"><i class="no-highlight">188</i>&nbsp;                            else if(qName.equalsIgnoreCase(&quot;GAMEDATA&quot;)){</b>
+<b class="fc"><i class="no-highlight">189</i>&nbsp;                                loadGameData(eventReader);</b>
+<b class="fc"><i class="no-highlight">190</i>&nbsp;                            } else if (qName.equalsIgnoreCase(&quot;College&quot;)) {</b>
+<b class="fc"><i class="no-highlight">191</i>&nbsp;                                loadCollege(eventReader);</b>
+<i class="no-highlight">192</i>&nbsp;                            }
+<i class="no-highlight">193</i>&nbsp;                            break;
+<i class="no-highlight">194</i>&nbsp;
+<i class="no-highlight">195</i>&nbsp;                        case XMLStreamConstants.CHARACTERS:
+<b class="nc"><i class="no-highlight">196</i>&nbsp;                            Characters characters = event.asCharacters();</b>
+<b class="nc"><i class="no-highlight">197</i>&nbsp;                            System.out.println(characters.getData());</b>
+<b class="nc"><i class="no-highlight">198</i>&nbsp;                            break;</b>
+<i class="no-highlight">199</i>&nbsp;
+<i class="no-highlight">200</i>&nbsp;                        case XMLStreamConstants.END_ELEMENT:
+<i class="no-highlight">201</i>&nbsp;                            break;
+<i class="no-highlight">202</i>&nbsp;                    }
+<i class="no-highlight">203</i>&nbsp;
+<b class="fc"><i class="no-highlight">204</i>&nbsp;            }</b>
+<i class="no-highlight">205</i>&nbsp;
+<i class="no-highlight">206</i>&nbsp;
+<i class="no-highlight">207</i>&nbsp;
+<i class="no-highlight">208</i>&nbsp;        }
+<b class="nc"><i class="no-highlight">209</i>&nbsp;        catch (FileNotFoundException e){</b>
+<b class="nc"><i class="no-highlight">210</i>&nbsp;            e.printStackTrace();</b>
+<b class="nc"><i class="no-highlight">211</i>&nbsp;        }catch (XMLStreamException e){</b>
+<b class="nc"><i class="no-highlight">212</i>&nbsp;            e.printStackTrace();</b>
+<b class="fc"><i class="no-highlight">213</i>&nbsp;        }</b>
+<i class="no-highlight">214</i>&nbsp;    }
+<i class="no-highlight">215</i>&nbsp;
+<i class="no-highlight">216</i>&nbsp;    /**
+<i class="no-highlight">217</i>&nbsp;     * Reads A ships data from XMl and updates the game to place it in it.
+<i class="no-highlight">218</i>&nbsp;     *
+<i class="no-highlight">219</i>&nbsp;     * @param eventReader The eventReader currently parsing the tree
+<i class="no-highlight">220</i>&nbsp;     * @throws XMLStreamException
+<i class="no-highlight">221</i>&nbsp;     */
+<i class="no-highlight">222</i>&nbsp;    private static void placeShip(XMLEventReader eventReader) throws XMLStreamException {
+<i class="no-highlight">223</i>&nbsp;        //skip through the xml till we find data values
+<b class="fc"><i class="no-highlight">224</i>&nbsp;        Next(eventReader);</b>
+<b class="fc"><i class="no-highlight">225</i>&nbsp;        XMLEvent event = eventReader.nextEvent();</b>
+<b class="fc"><i class="no-highlight">226</i>&nbsp;        Characters chars = event.asCharacters();</b>
+<b class="fc"><i class="no-highlight">227</i>&nbsp;        float x = Float.parseFloat(chars.getData()) ;</b>
+<i class="no-highlight">228</i>&nbsp;
+<b class="fc"><i class="no-highlight">229</i>&nbsp;        Next(eventReader);</b>
+<b class="fc"><i class="no-highlight">230</i>&nbsp;        event = eventReader.nextEvent();</b>
+<b class="fc"><i class="no-highlight">231</i>&nbsp;        chars = event.asCharacters();</b>
+<b class="fc"><i class="no-highlight">232</i>&nbsp;        float y = Float.parseFloat(chars.getData()) ;</b>
+<i class="no-highlight">233</i>&nbsp;
+<b class="fc"><i class="no-highlight">234</i>&nbsp;        Next(eventReader);</b>
+<b class="fc"><i class="no-highlight">235</i>&nbsp;        event = eventReader.nextEvent();</b>
+<b class="fc"><i class="no-highlight">236</i>&nbsp;        chars = event.asCharacters();</b>
+<b class="fc"><i class="no-highlight">237</i>&nbsp;        int index = Integer.parseInt(chars.getData()) ;</b>
+<i class="no-highlight">238</i>&nbsp;
+<b class="fc"><i class="no-highlight">239</i>&nbsp;        Next(eventReader);</b>
+<b class="fc"><i class="no-highlight">240</i>&nbsp;        event = eventReader.nextEvent();</b>
+<b class="fc"><i class="no-highlight">241</i>&nbsp;        chars = event.asCharacters();</b>
+<b class="fc"><i class="no-highlight">242</i>&nbsp;        int health = Integer.parseInt(chars.getData());</b>
+<i class="no-highlight">243</i>&nbsp;
+<i class="no-highlight">244</i>&nbsp;
+<b class="fc"><i class="no-highlight">245</i>&nbsp;        GameManager.ships.get(index).setPosition(x,y);</b>
+<b class="fc"><i class="no-highlight">246</i>&nbsp;        GameManager.ships.get(index).setHealth(health);</b>
+<b class="fc"><i class="no-highlight">247</i>&nbsp;        if(health&lt;=0){</b>
+<b class="nc"><i class="no-highlight">248</i>&nbsp;            GameManager.ships.get(index).ShipDeath();</b>
+<i class="no-highlight">249</i>&nbsp;        }
+<i class="no-highlight">250</i>&nbsp;    }
+<i class="no-highlight">251</i>&nbsp;
+<i class="no-highlight">252</i>&nbsp;    /**
+<i class="no-highlight">253</i>&nbsp;     * Reads the data relating to a college
+<i class="no-highlight">254</i>&nbsp;     *
+<i class="no-highlight">255</i>&nbsp;     * @param eventReader The eventReader currently parsing the tree
+<i class="no-highlight">256</i>&nbsp;     * @throws XMLStreamException
+<i class="no-highlight">257</i>&nbsp;     */
+<i class="no-highlight">258</i>&nbsp;    private static void loadCollege(XMLEventReader eventReader) throws XMLStreamException{
+<b class="fc"><i class="no-highlight">259</i>&nbsp;        Next(eventReader);</b>
+<b class="fc"><i class="no-highlight">260</i>&nbsp;        XMLEvent event = eventReader.nextEvent();</b>
+<b class="fc"><i class="no-highlight">261</i>&nbsp;        Characters chars = event.asCharacters();</b>
+<b class="fc"><i class="no-highlight">262</i>&nbsp;        String college_name = chars.getData();</b>
+<i class="no-highlight">263</i>&nbsp;
+<b class="fc"><i class="no-highlight">264</i>&nbsp;        Next(eventReader);</b>
+<b class="fc"><i class="no-highlight">265</i>&nbsp;        event = eventReader.nextEvent();</b>
+<b class="fc"><i class="no-highlight">266</i>&nbsp;        chars = event.asCharacters();</b>
+<b class="fc"><i class="no-highlight">267</i>&nbsp;        Boolean alive = Boolean.parseBoolean(chars.getData());</b>
+<i class="no-highlight">268</i>&nbsp;
+<b class="fc"><i class="no-highlight">269</i>&nbsp;        Next(eventReader);</b>
+<b class="fc"><i class="no-highlight">270</i>&nbsp;        event = eventReader.nextEvent();</b>
+<b class="fc"><i class="no-highlight">271</i>&nbsp;        chars = event.asCharacters();</b>
+<b class="fc"><i class="no-highlight">272</i>&nbsp;        Integer index = Integer.parseInt(chars.getData());</b>
+<i class="no-highlight">273</i>&nbsp;
+<b class="fc"><i class="no-highlight">274</i>&nbsp;        if(!alive){</b>
+<b class="nc"><i class="no-highlight">275</i>&nbsp;            GameManager.colleges.get(index).kill();</b>
+<i class="no-highlight">276</i>&nbsp;        }
+<i class="no-highlight">277</i>&nbsp;
+<i class="no-highlight">278</i>&nbsp;    }
+<i class="no-highlight">279</i>&nbsp;
+<i class="no-highlight">280</i>&nbsp;    /**
+<i class="no-highlight">281</i>&nbsp;     * Iterates through the XML tree until it comes to a character
+<i class="no-highlight">282</i>&nbsp;     *
+<i class="no-highlight">283</i>&nbsp;     * @param eventReader The event reader currently parsing the tree
+<i class="no-highlight">284</i>&nbsp;     * @throws XMLStreamException
+<i class="no-highlight">285</i>&nbsp;     */
+<i class="no-highlight">286</i>&nbsp;    private static void Next(XMLEventReader eventReader) throws XMLStreamException {
+<b class="fc"><i class="no-highlight">287</i>&nbsp;        while (! eventReader.peek().isCharacters()){</b>
+<b class="fc"><i class="no-highlight">288</i>&nbsp;            eventReader.nextEvent();</b>
+<i class="no-highlight">289</i>&nbsp;        }
+<i class="no-highlight">290</i>&nbsp;    }
+<i class="no-highlight">291</i>&nbsp;
+<i class="no-highlight">292</i>&nbsp;    /**
+<i class="no-highlight">293</i>&nbsp;     * Reads Game data from XML
+<i class="no-highlight">294</i>&nbsp;     * @param eventReader The eventReader currently parsing the tree
+<i class="no-highlight">295</i>&nbsp;     * @throws XMLStreamException
+<i class="no-highlight">296</i>&nbsp;     */
+<i class="no-highlight">297</i>&nbsp;    private static void loadGameData(XMLEventReader eventReader) throws XMLStreamException {
+<i class="no-highlight">298</i>&nbsp;
+<b class="fc"><i class="no-highlight">299</i>&nbsp;        while (! eventReader.peek().isCharacters()){</b>
+<b class="fc"><i class="no-highlight">300</i>&nbsp;            eventReader.nextEvent();</b>
+<i class="no-highlight">301</i>&nbsp;        }
+<b class="fc"><i class="no-highlight">302</i>&nbsp;        XMLEvent event = eventReader.nextEvent();</b>
+<i class="no-highlight">303</i>&nbsp;
+<b class="fc"><i class="no-highlight">304</i>&nbsp;        Characters chars = event.asCharacters();</b>
+<b class="fc"><i class="no-highlight">305</i>&nbsp;        int ammo = Integer.parseInt(chars.getData());</b>
+<b class="fc"><i class="no-highlight">306</i>&nbsp;        GameManager.getPlayer().setAmmo(ammo);</b>
+<i class="no-highlight">307</i>&nbsp;
+<b class="fc"><i class="no-highlight">308</i>&nbsp;        while (! eventReader.peek().isCharacters()){</b>
+<b class="fc"><i class="no-highlight">309</i>&nbsp;            eventReader.nextEvent();</b>
+<i class="no-highlight">310</i>&nbsp;        }
+<b class="fc"><i class="no-highlight">311</i>&nbsp;        event = eventReader.nextEvent();</b>
+<b class="fc"><i class="no-highlight">312</i>&nbsp;        chars = event.asCharacters();</b>
+<b class="fc"><i class="no-highlight">313</i>&nbsp;        int plunder = Integer.parseInt(chars.getData());</b>
+<i class="no-highlight">314</i>&nbsp;        //as game starts at 0 add the money from the save on.
+<b class="fc"><i class="no-highlight">315</i>&nbsp;        GameManager.getPlayer().plunder(plunder);</b>
+<i class="no-highlight">316</i>&nbsp;
+<b class="fc"><i class="no-highlight">317</i>&nbsp;        Next(eventReader);</b>
+<b class="fc"><i class="no-highlight">318</i>&nbsp;        event = eventReader.nextEvent();</b>
+<b class="fc"><i class="no-highlight">319</i>&nbsp;        GameManager.getPlayer().getComponent(Pirate.class).points =Integer.parseInt(event.asCharacters().getData());</b>
+<i class="no-highlight">320</i>&nbsp;
+<i class="no-highlight">321</i>&nbsp;    }
+<i class="no-highlight">322</i>&nbsp;}
+</div>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+        var codeBlock = document.getElementById('sourceCode');
+
+        if (codeBlock) {
+            hljs.highlightBlock(codeBlock);
+        }
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2022-05-01 15:41</div>
+</div>
+</body>
+</html>

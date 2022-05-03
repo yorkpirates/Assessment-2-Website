@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html id="htmlId">
 <head>
-  <title>Coverage Report > BoatTest</title>
+  <title>Coverage Report > PirateTest</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/highlight-idea.css";
@@ -17,10 +17,10 @@
 <div class="breadCrumbs">
 Current scope:     <a href="../../index.html">all classes</a>
     <span class="separator">|</span>
-    <a href="../index.html">io.team9.game.tests.Entitys</a>
+    <a href="../index.html">io.team9.game.tests.Components</a>
 </div>
 
-<h1>Coverage Summary for Class: BoatTest (io.team9.game.tests.Entitys)</h1>
+<h1>Coverage Summary for Class: PirateTest (io.team9.game.tests.Components)</h1>
 
 <table class="coverageStats">
 <tr>
@@ -39,7 +39,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 </th>
 </tr>
 <tr>
-  <td class="name">BoatTest</td>
+  <td class="name">PirateTest</td>
 <td class="coverageStat">
   <span class="percent">
     100%
@@ -53,7 +53,7 @@ Current scope:     <a href="../../index.html">all classes</a>
     100%
   </span>
   <span class="absValue">
-    (6/6)
+    (12/12)
   </span>
 </td>
 <td class="coverageStat">
@@ -61,7 +61,7 @@ Current scope:     <a href="../../index.html">all classes</a>
     100%
   </span>
   <span class="absValue">
-    (74/74)
+    (71/71)
   </span>
 </td>
 </tr>
@@ -73,141 +73,145 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 
 <pre>
-<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;package io.team9.game.tests.Entitys;
+<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;package io.team9.game.tests.Components;
 <i class="no-highlight">2</i>&nbsp;
-<i class="no-highlight">3</i>&nbsp;import com.badlogic.gdx.math.Vector2;
-<i class="no-highlight">4</i>&nbsp;import com.mygdx.game.Components.Pirate;
-<i class="no-highlight">5</i>&nbsp;import com.mygdx.game.Entitys.*;
-<i class="no-highlight">6</i>&nbsp;import com.mygdx.game.Managers.GameManager;
-<i class="no-highlight">7</i>&nbsp;import com.mygdx.game.Managers.PhysicsManager;
-<i class="no-highlight">8</i>&nbsp;import com.mygdx.game.Managers.RenderingManager;
-<i class="no-highlight">9</i>&nbsp;import com.mygdx.game.Physics.CollisionInfo;
-<i class="no-highlight">10</i>&nbsp;import com.mygdx.game.PirateGame;
-<i class="no-highlight">11</i>&nbsp;import com.mygdx.utils.Utilities;
-<i class="no-highlight">12</i>&nbsp;import io.team9.game.tests.GdxTestRunner;
-<i class="no-highlight">13</i>&nbsp;import org.junit.Test;
-<i class="no-highlight">14</i>&nbsp;import org.junit.runner.RunWith;
-<i class="no-highlight">15</i>&nbsp;
-<i class="no-highlight">16</i>&nbsp;import com.badlogic.gdx.physics.box2d.*;
-<i class="no-highlight">17</i>&nbsp;
-<i class="no-highlight">18</i>&nbsp;import java.util.ArrayList;
-<i class="no-highlight">19</i>&nbsp;
-<i class="no-highlight">20</i>&nbsp;import static org.junit.Assert.*;
-<i class="no-highlight">21</i>&nbsp;@RunWith(GdxTestRunner.class)
-<b class="fc"><i class="no-highlight">22</i>&nbsp;public class BoatTest {</b>
-<i class="no-highlight">23</i>&nbsp;    @Test
-<i class="no-highlight">24</i>&nbsp;    public void deathTest(){
-<b class="fc"><i class="no-highlight">25</i>&nbsp;        PhysicsManager.Initialize();</b>
-<i class="no-highlight">26</i>&nbsp;
-<b class="fc"><i class="no-highlight">27</i>&nbsp;        Ship boat = new Ship();</b>
-<b class="fc"><i class="no-highlight">28</i>&nbsp;        boat.setHealth(0);</b>
-<b class="fc"><i class="no-highlight">29</i>&nbsp;        assertFalse(boat.isAlive());</b>
-<b class="fc"><i class="no-highlight">30</i>&nbsp;        boat.setHealth(1);</b>
-<b class="fc"><i class="no-highlight">31</i>&nbsp;        assertTrue(boat.isAlive());</b>
-<i class="no-highlight">32</i>&nbsp;
-<i class="no-highlight">33</i>&nbsp;
+<i class="no-highlight">3</i>&nbsp;import com.mygdx.game.Components.Pirate;
+<i class="no-highlight">4</i>&nbsp;import com.mygdx.game.Managers.GameManager;
+<i class="no-highlight">5</i>&nbsp;import com.mygdx.game.Managers.PhysicsManager;
+<i class="no-highlight">6</i>&nbsp;import io.team9.game.tests.GdxTestRunner;
+<i class="no-highlight">7</i>&nbsp;import org.junit.Test;
+<i class="no-highlight">8</i>&nbsp;import org.junit.runner.RunWith;
+<i class="no-highlight">9</i>&nbsp;
+<i class="no-highlight">10</i>&nbsp;import static org.junit.Assert.*;
+<i class="no-highlight">11</i>&nbsp;
+<i class="no-highlight">12</i>&nbsp;@RunWith(GdxTestRunner.class)
+<b class="fc"><i class="no-highlight">13</i>&nbsp;public class PirateTest {</b>
+<i class="no-highlight">14</i>&nbsp;
+<i class="no-highlight">15</i>&nbsp;    @Test
+<i class="no-highlight">16</i>&nbsp;    public void plunderTest() {
+<b class="fc"><i class="no-highlight">17</i>&nbsp;        PhysicsManager.Initialize();</b>
+<i class="no-highlight">18</i>&nbsp;
+<b class="fc"><i class="no-highlight">19</i>&nbsp;        Pirate pirate = new Pirate();</b>
+<b class="fc"><i class="no-highlight">20</i>&nbsp;        pirate.addPlunder(1);</b>
+<b class="fc"><i class="no-highlight">21</i>&nbsp;        assertEquals(&quot;Plunder should add 1&quot;, 1, pirate.getPlunder());</b>
+<i class="no-highlight">22</i>&nbsp;    }
+<i class="no-highlight">23</i>&nbsp;
+<i class="no-highlight">24</i>&nbsp;    @Test
+<i class="no-highlight">25</i>&nbsp;    public void immortalityTest() {
+<b class="fc"><i class="no-highlight">26</i>&nbsp;        PhysicsManager.Initialize();</b>
+<b class="fc"><i class="no-highlight">27</i>&nbsp;        GameManager.Initialize();</b>
+<i class="no-highlight">28</i>&nbsp;
+<b class="fc"><i class="no-highlight">29</i>&nbsp;        Pirate pirate = new Pirate();</b>
+<b class="fc"><i class="no-highlight">30</i>&nbsp;        pirate.setImmortality(false);</b>
+<b class="fc"><i class="no-highlight">31</i>&nbsp;        assertFalse(pirate.isImmortality);</b>
+<b class="fc"><i class="no-highlight">32</i>&nbsp;        pirate.setImmortality(true);</b>
+<b class="fc"><i class="no-highlight">33</i>&nbsp;        assertTrue(pirate.isImmortality);</b>
 <i class="no-highlight">34</i>&nbsp;    }
-<i class="no-highlight">35</i>&nbsp;    @Test
-<i class="no-highlight">36</i>&nbsp;    public void cannonballCollisionTest(){
-<b class="fc"><i class="no-highlight">37</i>&nbsp;        PhysicsManager.Initialize();</b>
-<b class="fc"><i class="no-highlight">38</i>&nbsp;        GameManager.Initialize();</b>
-<b class="fc"><i class="no-highlight">39</i>&nbsp;        Ship shooter = new Ship();</b>
-<b class="fc"><i class="no-highlight">40</i>&nbsp;        shooter.setFaction(1);</b>
-<i class="no-highlight">41</i>&nbsp;
-<b class="fc"><i class="no-highlight">42</i>&nbsp;        Ship hit = new Ship();</b>
-<b class="fc"><i class="no-highlight">43</i>&nbsp;        hit.setFaction(2);</b>
-<b class="fc"><i class="no-highlight">44</i>&nbsp;        CannonBall shot = new CannonBall();</b>
-<b class="fc"><i class="no-highlight">45</i>&nbsp;        CollisionInfo info = new CollisionInfo();</b>
-<b class="fc"><i class="no-highlight">46</i>&nbsp;        Vector2 blank = new Vector2();</b>
+<i class="no-highlight">35</i>&nbsp;
+<i class="no-highlight">36</i>&nbsp;    @Test
+<i class="no-highlight">37</i>&nbsp;    public void unlimitedAmmoTest() {
+<b class="fc"><i class="no-highlight">38</i>&nbsp;        PhysicsManager.Initialize();</b>
+<b class="fc"><i class="no-highlight">39</i>&nbsp;        GameManager.Initialize();</b>
+<i class="no-highlight">40</i>&nbsp;
+<b class="fc"><i class="no-highlight">41</i>&nbsp;        Pirate pirate = new Pirate();</b>
+<b class="fc"><i class="no-highlight">42</i>&nbsp;        pirate.setUnlimitedAmmo(false);</b>
+<b class="fc"><i class="no-highlight">43</i>&nbsp;        assertFalse(pirate.isUnlimitedAmmo);</b>
+<b class="fc"><i class="no-highlight">44</i>&nbsp;        pirate.setUnlimitedAmmo(true);</b>
+<b class="fc"><i class="no-highlight">45</i>&nbsp;        assertTrue(pirate.isUnlimitedAmmo);</b>
+<i class="no-highlight">46</i>&nbsp;    }
 <i class="no-highlight">47</i>&nbsp;
-<b class="fc"><i class="no-highlight">48</i>&nbsp;        shot.fire(blank,blank,shooter);</b>
-<b class="fc"><i class="no-highlight">49</i>&nbsp;        info.b= hit;</b>
-<b class="fc"><i class="no-highlight">50</i>&nbsp;        info.a=shot;</b>
-<b class="fc"><i class="no-highlight">51</i>&nbsp;        Integer healthBefore = hit.getHealth();</b>
-<b class="fc"><i class="no-highlight">52</i>&nbsp;        hit.EnterTrigger(info);</b>
-<b class="fc"><i class="no-highlight">53</i>&nbsp;        assertEquals(&quot;After being hit the health should be 5 less than before&quot;,healthBefore-5,hit.getHealth());</b>
-<i class="no-highlight">54</i>&nbsp;
-<b class="fc"><i class="no-highlight">55</i>&nbsp;        shooter.setFaction(2);</b>
-<b class="fc"><i class="no-highlight">56</i>&nbsp;        healthBefore = hit.getHealth();</b>
-<b class="fc"><i class="no-highlight">57</i>&nbsp;        hit.EnterTrigger(info);</b>
-<b class="fc"><i class="no-highlight">58</i>&nbsp;        assertEquals(&quot;After being hit from the same faction no health should be lost&quot;,healthBefore-0,hit.getHealth());</b>
+<i class="no-highlight">48</i>&nbsp;    @Test
+<i class="no-highlight">49</i>&nbsp;    public void shootEightDirectionsTest() {
+<b class="fc"><i class="no-highlight">50</i>&nbsp;        PhysicsManager.Initialize();</b>
+<b class="fc"><i class="no-highlight">51</i>&nbsp;        GameManager.Initialize();</b>
+<i class="no-highlight">52</i>&nbsp;
+<b class="fc"><i class="no-highlight">53</i>&nbsp;        Pirate pirate = new Pirate();</b>
+<b class="fc"><i class="no-highlight">54</i>&nbsp;        pirate.setShootEightDirections(false);</b>
+<b class="fc"><i class="no-highlight">55</i>&nbsp;        assertFalse(pirate.isShootEightDirections);</b>
+<b class="fc"><i class="no-highlight">56</i>&nbsp;        pirate.setShootEightDirections(true);</b>
+<b class="fc"><i class="no-highlight">57</i>&nbsp;        assertTrue(pirate.isShootEightDirections);</b>
+<i class="no-highlight">58</i>&nbsp;    }
 <i class="no-highlight">59</i>&nbsp;
-<b class="fc"><i class="no-highlight">60</i>&nbsp;        hit.setHealth(5);</b>
-<b class="fc"><i class="no-highlight">61</i>&nbsp;        shooter.setFaction(1);</b>
-<b class="fc"><i class="no-highlight">62</i>&nbsp;        hit.EnterTrigger(info);</b>
-<b class="fc"><i class="no-highlight">63</i>&nbsp;        assertEquals(50,shooter.getPlunder());</b>
-<b class="fc"><i class="no-highlight">64</i>&nbsp;        assertEquals(100,shooter.getComponent(Pirate.class).getPoints());</b>
-<b class="fc"><i class="no-highlight">65</i>&nbsp;        assertFalse(hit.isAlive());</b>
-<i class="no-highlight">66</i>&nbsp;
-<i class="no-highlight">67</i>&nbsp;    }
-<i class="no-highlight">68</i>&nbsp;    @Test
-<i class="no-highlight">69</i>&nbsp;    public void cannonballcollegeTest(){
-<b class="fc"><i class="no-highlight">70</i>&nbsp;        PhysicsManager.Initialize();</b>
-<b class="fc"><i class="no-highlight">71</i>&nbsp;        Ship hit = new Ship();</b>
-<b class="fc"><i class="no-highlight">72</i>&nbsp;        CannonBallCollege shot = new CannonBallCollege();</b>
-<b class="fc"><i class="no-highlight">73</i>&nbsp;        CollisionInfo info = new CollisionInfo();</b>
-<b class="fc"><i class="no-highlight">74</i>&nbsp;        Vector2 blank = new Vector2();</b>
-<b class="fc"><i class="no-highlight">75</i>&nbsp;        Integer healthBefore = hit.getHealth();</b>
-<b class="fc"><i class="no-highlight">76</i>&nbsp;        info.b= hit;</b>
-<b class="fc"><i class="no-highlight">77</i>&nbsp;        info.a=shot;</b>
-<i class="no-highlight">78</i>&nbsp;
-<b class="fc"><i class="no-highlight">79</i>&nbsp;        healthBefore = hit.getHealth();</b>
-<b class="fc"><i class="no-highlight">80</i>&nbsp;        hit.EnterTrigger(info);</b>
-<b class="fc"><i class="no-highlight">81</i>&nbsp;        assertEquals(&quot;Health should be 15 lower after being hit&quot;,healthBefore-15,hit.getHealth());</b>
-<i class="no-highlight">82</i>&nbsp;
-<b class="fc"><i class="no-highlight">83</i>&nbsp;        hit.setHealth(15);</b>
-<b class="fc"><i class="no-highlight">84</i>&nbsp;        hit.EnterTrigger(info);</b>
-<b class="fc"><i class="no-highlight">85</i>&nbsp;        assertFalse(hit.isAlive());</b>
-<i class="no-highlight">86</i>&nbsp;
-<i class="no-highlight">87</i>&nbsp;
-<i class="no-highlight">88</i>&nbsp;    }
-<i class="no-highlight">89</i>&nbsp;
-<i class="no-highlight">90</i>&nbsp;    @Test
-<i class="no-highlight">91</i>&nbsp;    public void weatherCollisionTest(){
-<b class="fc"><i class="no-highlight">92</i>&nbsp;        PhysicsManager.Initialize();</b>
-<b class="fc"><i class="no-highlight">93</i>&nbsp;        Ship hit = new Ship();</b>
-<b class="fc"><i class="no-highlight">94</i>&nbsp;        Weather storm = new Weather();</b>
-<b class="fc"><i class="no-highlight">95</i>&nbsp;        CollisionInfo info = new CollisionInfo();</b>
-<b class="fc"><i class="no-highlight">96</i>&nbsp;        Vector2 blank = new Vector2();</b>
-<b class="fc"><i class="no-highlight">97</i>&nbsp;        Integer healthBefore = hit.getHealth();</b>
-<b class="fc"><i class="no-highlight">98</i>&nbsp;        info.a= hit;</b>
-<b class="fc"><i class="no-highlight">99</i>&nbsp;        info.b=storm;</b>
+<i class="no-highlight">60</i>&nbsp;    @Test
+<i class="no-highlight">61</i>&nbsp;    public void biggerDamageTest() {
+<b class="fc"><i class="no-highlight">62</i>&nbsp;        PhysicsManager.Initialize();</b>
+<b class="fc"><i class="no-highlight">63</i>&nbsp;        GameManager.Initialize();</b>
+<i class="no-highlight">64</i>&nbsp;
+<b class="fc"><i class="no-highlight">65</i>&nbsp;        Pirate pirate = new Pirate();</b>
+<b class="fc"><i class="no-highlight">66</i>&nbsp;        pirate.setBiggerDamage(false);</b>
+<b class="fc"><i class="no-highlight">67</i>&nbsp;        assertFalse(pirate.isBiggerDamage);</b>
+<b class="fc"><i class="no-highlight">68</i>&nbsp;        pirate.setBiggerDamage(true);</b>
+<b class="fc"><i class="no-highlight">69</i>&nbsp;        assertTrue(pirate.isBiggerDamage);</b>
+<i class="no-highlight">70</i>&nbsp;    }
+<i class="no-highlight">71</i>&nbsp;
+<i class="no-highlight">72</i>&nbsp;    @Test
+<i class="no-highlight">73</i>&nbsp;    public void healthTest() {
+<b class="fc"><i class="no-highlight">74</i>&nbsp;        PhysicsManager.Initialize();</b>
+<b class="fc"><i class="no-highlight">75</i>&nbsp;        GameManager.Initialize();</b>
+<i class="no-highlight">76</i>&nbsp;
+<b class="fc"><i class="no-highlight">77</i>&nbsp;        Pirate pirate = new Pirate();</b>
+<b class="fc"><i class="no-highlight">78</i>&nbsp;        pirate.health = 0;</b>
+<b class="fc"><i class="no-highlight">79</i>&nbsp;        assertEquals(&quot;Health should be 0&quot;, 0, pirate.getHealth());</b>
+<b class="fc"><i class="no-highlight">80</i>&nbsp;        pirate.setHealth(2);</b>
+<b class="fc"><i class="no-highlight">81</i>&nbsp;        assertEquals(&quot;Health should be 2&quot;, 2, pirate.getHealth());</b>
+<i class="no-highlight">82</i>&nbsp;    }
+<i class="no-highlight">83</i>&nbsp;
+<i class="no-highlight">84</i>&nbsp;    @Test
+<i class="no-highlight">85</i>&nbsp;    public void ammoTest() {
+<b class="fc"><i class="no-highlight">86</i>&nbsp;        PhysicsManager.Initialize();</b>
+<b class="fc"><i class="no-highlight">87</i>&nbsp;        GameManager.Initialize();</b>
+<i class="no-highlight">88</i>&nbsp;
+<b class="fc"><i class="no-highlight">89</i>&nbsp;        Pirate pirate = new Pirate();</b>
+<b class="fc"><i class="no-highlight">90</i>&nbsp;        pirate.ammo = 0;</b>
+<b class="fc"><i class="no-highlight">91</i>&nbsp;        assertEquals(&quot;Ammo should be 0&quot;, 0, pirate.getAmmo());</b>
+<b class="fc"><i class="no-highlight">92</i>&nbsp;        pirate.setAmmo(2);</b>
+<b class="fc"><i class="no-highlight">93</i>&nbsp;        assertEquals(&quot;Ammo should be 2&quot;, 2, pirate.getAmmo());</b>
+<i class="no-highlight">94</i>&nbsp;    }
+<i class="no-highlight">95</i>&nbsp;
+<i class="no-highlight">96</i>&nbsp;    @Test
+<i class="no-highlight">97</i>&nbsp;    public void pointsTest() {
+<b class="fc"><i class="no-highlight">98</i>&nbsp;        PhysicsManager.Initialize();</b>
+<b class="fc"><i class="no-highlight">99</i>&nbsp;        GameManager.Initialize();</b>
 <i class="no-highlight">100</i>&nbsp;
-<b class="fc"><i class="no-highlight">101</i>&nbsp;        healthBefore = hit.getHealth();</b>
-<b class="fc"><i class="no-highlight">102</i>&nbsp;        hit.EnterTrigger(info);</b>
-<b class="fc"><i class="no-highlight">103</i>&nbsp;        assertEquals(&quot;Health should be 10 lower after being hit&quot;,healthBefore-10,hit.getHealth());</b>
-<i class="no-highlight">104</i>&nbsp;
-<b class="fc"><i class="no-highlight">105</i>&nbsp;        hit.setHealth(10);</b>
-<b class="fc"><i class="no-highlight">106</i>&nbsp;        hit.EnterTrigger(info);</b>
-<b class="fc"><i class="no-highlight">107</i>&nbsp;        assertFalse(hit.isAlive());</b>
-<i class="no-highlight">108</i>&nbsp;
-<i class="no-highlight">109</i>&nbsp;
-<i class="no-highlight">110</i>&nbsp;    }
-<i class="no-highlight">111</i>&nbsp;    @Test
-<i class="no-highlight">112</i>&nbsp;    public void monsterCollisionTest(){
-<b class="fc"><i class="no-highlight">113</i>&nbsp;        PhysicsManager.Initialize();</b>
-<b class="fc"><i class="no-highlight">114</i>&nbsp;        Ship hit = new Ship();</b>
-<b class="fc"><i class="no-highlight">115</i>&nbsp;        Monster monster = new Monster();</b>
-<b class="fc"><i class="no-highlight">116</i>&nbsp;        CollisionInfo info = new CollisionInfo();</b>
-<b class="fc"><i class="no-highlight">117</i>&nbsp;        Vector2 blank = new Vector2();</b>
-<b class="fc"><i class="no-highlight">118</i>&nbsp;        Integer healthBefore = hit.getHealth();</b>
-<b class="fc"><i class="no-highlight">119</i>&nbsp;        info.a= hit;</b>
-<b class="fc"><i class="no-highlight">120</i>&nbsp;        info.b=monster;</b>
+<b class="fc"><i class="no-highlight">101</i>&nbsp;        Pirate pirate = new Pirate();</b>
+<b class="fc"><i class="no-highlight">102</i>&nbsp;        pirate.points = 0;</b>
+<b class="fc"><i class="no-highlight">103</i>&nbsp;        assertEquals(&quot;Points should be 0&quot;, 0, pirate.getPoints());</b>
+<b class="fc"><i class="no-highlight">104</i>&nbsp;        pirate.addPoints(2);</b>
+<b class="fc"><i class="no-highlight">105</i>&nbsp;        assertEquals(&quot;Points should be 2&quot;, 2, pirate.getPoints());</b>
+<i class="no-highlight">106</i>&nbsp;    }
+<i class="no-highlight">107</i>&nbsp;
+<i class="no-highlight">108</i>&nbsp;    @Test
+<i class="no-highlight">109</i>&nbsp;    public void aliveTest() {
+<b class="fc"><i class="no-highlight">110</i>&nbsp;        PhysicsManager.Initialize();</b>
+<b class="fc"><i class="no-highlight">111</i>&nbsp;        GameManager.Initialize();</b>
+<i class="no-highlight">112</i>&nbsp;
+<b class="fc"><i class="no-highlight">113</i>&nbsp;        Pirate pirate = new Pirate();</b>
+<b class="fc"><i class="no-highlight">114</i>&nbsp;        assertTrue(pirate.isAlive());</b>
+<i class="no-highlight">115</i>&nbsp;    }
+<i class="no-highlight">116</i>&nbsp;
+<i class="no-highlight">117</i>&nbsp;    @Test
+<i class="no-highlight">118</i>&nbsp;    public void killTest() {
+<b class="fc"><i class="no-highlight">119</i>&nbsp;        PhysicsManager.Initialize();</b>
+<b class="fc"><i class="no-highlight">120</i>&nbsp;        GameManager.Initialize();</b>
 <i class="no-highlight">121</i>&nbsp;
-<b class="fc"><i class="no-highlight">122</i>&nbsp;        healthBefore = hit.getHealth();</b>
-<b class="fc"><i class="no-highlight">123</i>&nbsp;        hit.EnterTrigger(info);</b>
-<b class="fc"><i class="no-highlight">124</i>&nbsp;        assertEquals(&quot;Health should be 40 lower after being hit&quot;,healthBefore-40,hit.getHealth());</b>
-<i class="no-highlight">125</i>&nbsp;
-<b class="fc"><i class="no-highlight">126</i>&nbsp;        hit.setHealth(40);</b>
-<b class="fc"><i class="no-highlight">127</i>&nbsp;        hit.EnterTrigger(info);</b>
-<b class="fc"><i class="no-highlight">128</i>&nbsp;        assertFalse(hit.isAlive());</b>
-<i class="no-highlight">129</i>&nbsp;
-<i class="no-highlight">130</i>&nbsp;
-<i class="no-highlight">131</i>&nbsp;    }
-<i class="no-highlight">132</i>&nbsp;
+<b class="fc"><i class="no-highlight">122</i>&nbsp;        Pirate pirate = new Pirate();</b>
+<b class="fc"><i class="no-highlight">123</i>&nbsp;        pirate.health = 10;</b>
+<b class="fc"><i class="no-highlight">124</i>&nbsp;        pirate.kill();</b>
+<b class="fc"><i class="no-highlight">125</i>&nbsp;        assertEquals(&quot;Health should be 0&quot;, 0, pirate.getHealth());</b>
+<b class="fc"><i class="no-highlight">126</i>&nbsp;        assertFalse(pirate.isAlive());</b>
+<i class="no-highlight">127</i>&nbsp;    }
+<i class="no-highlight">128</i>&nbsp;
+<i class="no-highlight">129</i>&nbsp;    @Test
+<i class="no-highlight">130</i>&nbsp;    public void takeDamageTest() {
+<b class="fc"><i class="no-highlight">131</i>&nbsp;        PhysicsManager.Initialize();</b>
+<b class="fc"><i class="no-highlight">132</i>&nbsp;        GameManager.Initialize();</b>
 <i class="no-highlight">133</i>&nbsp;
-<i class="no-highlight">134</i>&nbsp;
-<i class="no-highlight">135</i>&nbsp;}
+<b class="fc"><i class="no-highlight">134</i>&nbsp;        Pirate pirate = new Pirate();</b>
+<b class="fc"><i class="no-highlight">135</i>&nbsp;        pirate.health = 10;</b>
+<b class="fc"><i class="no-highlight">136</i>&nbsp;        pirate.takeDamage(1);</b>
+<b class="fc"><i class="no-highlight">137</i>&nbsp;        assertEquals(&quot;Health should be 9&quot;, 9, pirate.getHealth());</b>
+<i class="no-highlight">138</i>&nbsp;    }
+<i class="no-highlight">139</i>&nbsp;}
 </div>
 </pre>
 </div>
@@ -234,7 +238,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-05-01 15:41</div>
+    <div style="float:right;">generated on 2022-05-03 11:14</div>
 </div>
 </body>
 </html>

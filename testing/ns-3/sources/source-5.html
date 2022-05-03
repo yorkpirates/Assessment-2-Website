@@ -58,10 +58,10 @@ Current scope:     <a href="../../index.html">all classes</a>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    78.4%
+    61.3%
   </span>
   <span class="absValue">
-    (58/74)
+    (65/106)
   </span>
 </td>
 </tr>
@@ -144,153 +144,154 @@ Current scope:     <a href="../../index.html">all classes</a>
 <b class="fc"><i class="no-highlight">69</i>&nbsp;        this.factionId = factionId;</b>
 <i class="no-highlight">70</i>&nbsp;    }
 <i class="no-highlight">71</i>&nbsp;
-<i class="no-highlight">72</i>&nbsp;    public void setImmortality(boolean state){
-<b class="fc"><i class="no-highlight">73</i>&nbsp;        isImmortality = state;</b>
-<i class="no-highlight">74</i>&nbsp;    }
-<i class="no-highlight">75</i>&nbsp;
-<b class="fc"><i class="no-highlight">76</i>&nbsp;    public boolean getImmortality() { return isImmortality; };</b>
-<i class="no-highlight">77</i>&nbsp;
-<i class="no-highlight">78</i>&nbsp;    public void setUnlimitedAmmo(boolean state){
-<b class="fc"><i class="no-highlight">79</i>&nbsp;        isUnlimitedAmmo = state;</b>
-<i class="no-highlight">80</i>&nbsp;    }
-<i class="no-highlight">81</i>&nbsp;
-<b class="fc"><i class="no-highlight">82</i>&nbsp;    public boolean getUnlimitedAmmo() { return isUnlimitedAmmo; };</b>
-<i class="no-highlight">83</i>&nbsp;
-<i class="no-highlight">84</i>&nbsp;    public void setShootEightDirections(boolean state){
-<b class="fc"><i class="no-highlight">85</i>&nbsp;        isShootEightDirections = state;</b>
-<i class="no-highlight">86</i>&nbsp;    }
-<i class="no-highlight">87</i>&nbsp;
-<b class="fc"><i class="no-highlight">88</i>&nbsp;    public boolean getShootEightDirections() { return isShootEightDirections; };</b>
-<i class="no-highlight">89</i>&nbsp;
-<i class="no-highlight">90</i>&nbsp;    public void setBiggerDamage(boolean state){
-<b class="fc"><i class="no-highlight">91</i>&nbsp;        isBiggerDamage = state;</b>
-<i class="no-highlight">92</i>&nbsp;    }
-<i class="no-highlight">93</i>&nbsp;
-<b class="fc"><i class="no-highlight">94</i>&nbsp;    public boolean getBiggerDamage() { return isBiggerDamage; };</b>
-<i class="no-highlight">95</i>&nbsp;
-<i class="no-highlight">96</i>&nbsp;    public void takeDamage(float dmg) {
-<b class="fc"><i class="no-highlight">97</i>&nbsp;        if (isImmortality)</b>
-<b class="nc"><i class="no-highlight">98</i>&nbsp;            dmg = 0;</b>
-<i class="no-highlight">99</i>&nbsp;
-<b class="fc"><i class="no-highlight">100</i>&nbsp;        health -= dmg;</b>
-<b class="fc"><i class="no-highlight">101</i>&nbsp;        if (health &lt;= 0) {</b>
-<b class="fc"><i class="no-highlight">102</i>&nbsp;            health = 0;</b>
-<b class="fc"><i class="no-highlight">103</i>&nbsp;            isAlive = false;</b>
-<i class="no-highlight">104</i>&nbsp;        }
-<i class="no-highlight">105</i>&nbsp;    }
-<i class="no-highlight">106</i>&nbsp;
-<i class="no-highlight">107</i>&nbsp;    /**
-<i class="no-highlight">108</i>&nbsp;     * Will shoot a cannonball assigning this.parent as the cannonball&#39;s parent (must be Ship atm)
-<i class="no-highlight">109</i>&nbsp;     *
-<i class="no-highlight">110</i>&nbsp;     * @param dir the direction to shoot in
-<i class="no-highlight">111</i>&nbsp;     */
-<i class="no-highlight">112</i>&nbsp;    public void shoot(Vector2 dir) {
-<b class="nc"><i class="no-highlight">113</i>&nbsp;        if (ammo == 0) {</b>
-<i class="no-highlight">114</i>&nbsp;            return;
-<i class="no-highlight">115</i>&nbsp;        }
-<b class="nc"><i class="no-highlight">116</i>&nbsp;        if(!isUnlimitedAmmo)</b>
-<b class="nc"><i class="no-highlight">117</i>&nbsp;            ammo--;</b>
-<b class="nc"><i class="no-highlight">118</i>&nbsp;        if(!isShootEightDirections)</b>
-<b class="nc"><i class="no-highlight">119</i>&nbsp;            GameManager.shoot((Ship) parent, dir);</b>
-<i class="no-highlight">120</i>&nbsp;        else{
-<b class="nc"><i class="no-highlight">121</i>&nbsp;            GameManager.shoot((Ship) parent, new Vector2(0, 1));</b>
-<b class="nc"><i class="no-highlight">122</i>&nbsp;            GameManager.shoot((Ship) parent, new Vector2(0, -1));</b>
-<b class="nc"><i class="no-highlight">123</i>&nbsp;            GameManager.shoot((Ship) parent, new Vector2(1, 0));</b>
-<b class="nc"><i class="no-highlight">124</i>&nbsp;            GameManager.shoot((Ship) parent, new Vector2(-1, 0));</b>
-<b class="nc"><i class="no-highlight">125</i>&nbsp;            GameManager.shoot((Ship) parent, new Vector2(1, 1));</b>
-<b class="nc"><i class="no-highlight">126</i>&nbsp;            GameManager.shoot((Ship) parent, new Vector2(-1, 1));</b>
-<b class="nc"><i class="no-highlight">127</i>&nbsp;            GameManager.shoot((Ship) parent, new Vector2(1, -1));</b>
-<b class="nc"><i class="no-highlight">128</i>&nbsp;            GameManager.shoot((Ship) parent, new Vector2(-1, -1));</b>
-<i class="no-highlight">129</i>&nbsp;        }
-<i class="no-highlight">130</i>&nbsp;    }
-<i class="no-highlight">131</i>&nbsp;
-<i class="no-highlight">132</i>&nbsp;    /**
-<i class="no-highlight">133</i>&nbsp;     * Adds ammo
-<i class="no-highlight">134</i>&nbsp;     *
-<i class="no-highlight">135</i>&nbsp;     * @param newAmmo amount to add
-<i class="no-highlight">136</i>&nbsp;     */
-<i class="no-highlight">137</i>&nbsp;    public static void addAmmo(int newAmmo) {
-<b class="nc"><i class="no-highlight">138</i>&nbsp;        ammo += newAmmo;</b>
-<i class="no-highlight">139</i>&nbsp;    }
-<i class="no-highlight">140</i>&nbsp;
-<i class="no-highlight">141</i>&nbsp;    public int getHealth() {
-<b class="fc"><i class="no-highlight">142</i>&nbsp;        return health;</b>
-<i class="no-highlight">143</i>&nbsp;    }
-<i class="no-highlight">144</i>&nbsp;
-<i class="no-highlight">145</i>&nbsp;    public void setHealth(int overrideHealth) {
-<b class="fc"><i class="no-highlight">146</i>&nbsp;        health = overrideHealth;</b>
-<i class="no-highlight">147</i>&nbsp;    }
-<i class="no-highlight">148</i>&nbsp;
-<i class="no-highlight">149</i>&nbsp;    /**
-<i class="no-highlight">150</i>&nbsp;     * if dst to target is less than attack range
-<i class="no-highlight">151</i>&nbsp;     * target will be null if not in agro range
-<i class="no-highlight">152</i>&nbsp;     */
-<i class="no-highlight">153</i>&nbsp;    public boolean canAttack() {
-<b class="fc"><i class="no-highlight">154</i>&nbsp;        if (targets.peek() != null) {</b>
-<b class="fc"><i class="no-highlight">155</i>&nbsp;            final Ship p = (Ship) parent;</b>
-<b class="fc"><i class="no-highlight">156</i>&nbsp;            final Vector2 pos = p.getPosition();</b>
-<b class="fc"><i class="no-highlight">157</i>&nbsp;            final float dst = pos.dst(targets.peek().getPosition());</b>
-<i class="no-highlight">158</i>&nbsp;            // withing attack range
-<b class="fc"><i class="no-highlight">159</i>&nbsp;            return dst &lt; Ship.getAttackRange();</b>
-<i class="no-highlight">160</i>&nbsp;        }
-<b class="fc"><i class="no-highlight">161</i>&nbsp;        return false;</b>
-<i class="no-highlight">162</i>&nbsp;    }
-<i class="no-highlight">163</i>&nbsp;
-<i class="no-highlight">164</i>&nbsp;    /**
-<i class="no-highlight">165</i>&nbsp;     * if dst to target is &gt;= attack range
-<i class="no-highlight">166</i>&nbsp;     * target will be null if not in agro range
-<i class="no-highlight">167</i>&nbsp;     */
-<i class="no-highlight">168</i>&nbsp;    public boolean isAgro() {
-<b class="fc"><i class="no-highlight">169</i>&nbsp;        if (targets.peek() != null) {</b>
-<b class="fc"><i class="no-highlight">170</i>&nbsp;            final Ship p = (Ship) parent;</b>
-<b class="fc"><i class="no-highlight">171</i>&nbsp;            final Vector2 pos = p.getPosition();</b>
-<b class="fc"><i class="no-highlight">172</i>&nbsp;            final float dst = pos.dst(targets.peek().getPosition());</b>
-<i class="no-highlight">173</i>&nbsp;            // out of attack range but in agro range
-<b class="fc"><i class="no-highlight">174</i>&nbsp;            return dst &gt;= Ship.getAttackRange();</b>
-<i class="no-highlight">175</i>&nbsp;        }
-<b class="fc"><i class="no-highlight">176</i>&nbsp;        return false;</b>
-<i class="no-highlight">177</i>&nbsp;    }
-<i class="no-highlight">178</i>&nbsp;
-<i class="no-highlight">179</i>&nbsp;    public Ship getTarget() {
-<b class="fc"><i class="no-highlight">180</i>&nbsp;        return targets.peek();</b>
-<i class="no-highlight">181</i>&nbsp;    }
-<i class="no-highlight">182</i>&nbsp;
-<i class="no-highlight">183</i>&nbsp;    public void removeTarget() {
-<b class="fc"><i class="no-highlight">184</i>&nbsp;        targets.pop();</b>
-<i class="no-highlight">185</i>&nbsp;    }
-<i class="no-highlight">186</i>&nbsp;
-<i class="no-highlight">187</i>&nbsp;    public boolean isAlive() {
-<b class="fc"><i class="no-highlight">188</i>&nbsp;        return isAlive;</b>
-<i class="no-highlight">189</i>&nbsp;    }
-<i class="no-highlight">190</i>&nbsp;
-<i class="no-highlight">191</i>&nbsp;    /**
-<i class="no-highlight">192</i>&nbsp;     * Kill its self
-<i class="no-highlight">193</i>&nbsp;     */
-<i class="no-highlight">194</i>&nbsp;    public void kill() {
-<b class="fc"><i class="no-highlight">195</i>&nbsp;        health = 0;</b>
-<b class="fc"><i class="no-highlight">196</i>&nbsp;        isAlive = false;</b>
-<i class="no-highlight">197</i>&nbsp;    }
-<i class="no-highlight">198</i>&nbsp;
-<i class="no-highlight">199</i>&nbsp;    public void setAmmo(int ammo) {
-<b class="fc"><i class="no-highlight">200</i>&nbsp;        this.ammo = ammo;</b>
-<i class="no-highlight">201</i>&nbsp;    }
-<i class="no-highlight">202</i>&nbsp;
-<i class="no-highlight">203</i>&nbsp;    public int getAmmo() {
-<b class="fc"><i class="no-highlight">204</i>&nbsp;        return ammo;</b>
-<i class="no-highlight">205</i>&nbsp;    }
-<i class="no-highlight">206</i>&nbsp;
-<i class="no-highlight">207</i>&nbsp;    public int targetCount() {
-<b class="nc"><i class="no-highlight">208</i>&nbsp;        return targets.size();</b>
-<i class="no-highlight">209</i>&nbsp;    }
-<i class="no-highlight">210</i>&nbsp;
-<i class="no-highlight">211</i>&nbsp;    public QueueFIFO&lt;Ship&gt; getTargets() {
-<b class="fc"><i class="no-highlight">212</i>&nbsp;        return targets;</b>
-<i class="no-highlight">213</i>&nbsp;    }
-<i class="no-highlight">214</i>&nbsp;
-<b class="fc"><i class="no-highlight">215</i>&nbsp;    public int getPoints(){return points;}</b>
-<i class="no-highlight">216</i>&nbsp;
-<b class="fc"><i class="no-highlight">217</i>&nbsp;    public void addPoints(int value){points += value;}</b>
-<i class="no-highlight">218</i>&nbsp;}
+<i class="no-highlight">72</i>&nbsp;    //NEW FUNCTIONS
+<b class="nc"><i class="no-highlight">73</i>&nbsp;    public void setImmortality(boolean state){</b>
+<b class="fc"><i class="no-highlight">74</i>&nbsp;        isImmortality = state;</b>
+<i class="no-highlight">75</i>&nbsp;    }
+<b class="nc"><i class="no-highlight">76</i>&nbsp;</b>
+<b class="fc"><i class="no-highlight">77</i>&nbsp;    public boolean getImmortality() { return isImmortality; };</b>
+<i class="no-highlight">78</i>&nbsp;
+<b class="nc"><i class="no-highlight">79</i>&nbsp;    public void setUnlimitedAmmo(boolean state){</b>
+<b class="fc"><i class="no-highlight">80</i>&nbsp;        isUnlimitedAmmo = state;</b>
+<i class="no-highlight">81</i>&nbsp;    }
+<b class="nc"><i class="no-highlight">82</i>&nbsp;</b>
+<b class="fc"><i class="no-highlight">83</i>&nbsp;    public boolean getUnlimitedAmmo() { return isUnlimitedAmmo; };</b>
+<i class="no-highlight">84</i>&nbsp;
+<b class="nc"><i class="no-highlight">85</i>&nbsp;    public void setShootEightDirections(boolean state){</b>
+<b class="fc"><i class="no-highlight">86</i>&nbsp;        isShootEightDirections = state;</b>
+<i class="no-highlight">87</i>&nbsp;    }
+<b class="nc"><i class="no-highlight">88</i>&nbsp;</b>
+<b class="fc"><i class="no-highlight">89</i>&nbsp;    public boolean getShootEightDirections() { return isShootEightDirections; };</b>
+<i class="no-highlight">90</i>&nbsp;
+<b class="nc"><i class="no-highlight">91</i>&nbsp;    public void setBiggerDamage(boolean state){</b>
+<b class="fc"><i class="no-highlight">92</i>&nbsp;        isBiggerDamage = state;</b>
+<i class="no-highlight">93</i>&nbsp;    }
+<b class="nc"><i class="no-highlight">94</i>&nbsp;</b>
+<b class="fc"><i class="no-highlight">95</i>&nbsp;    public boolean getBiggerDamage() { return isBiggerDamage; };</b>
+<i class="no-highlight">96</i>&nbsp;    //END
+<b class="nc"><i class="no-highlight">97</i>&nbsp;    public void takeDamage(float dmg) {</b>
+<b class="fc"><i class="no-highlight">98</i>&nbsp;        if (isImmortality)</b>
+<b class="nc"><i class="no-highlight">99</i>&nbsp;            dmg = 0;</b>
+<b class="nc"><i class="no-highlight">100</i>&nbsp;</b>
+<b class="fc"><i class="no-highlight">101</i>&nbsp;        health -= dmg;</b>
+<b class="fc"><i class="no-highlight">102</i>&nbsp;        if (health &lt;= 0) {</b>
+<b class="fc"><i class="no-highlight">103</i>&nbsp;            health = 0;</b>
+<b class="fc"><i class="no-highlight">104</i>&nbsp;            isAlive = false;</b>
+<i class="no-highlight">105</i>&nbsp;        }
+<i class="no-highlight">106</i>&nbsp;    }
+<i class="no-highlight">107</i>&nbsp;
+<i class="no-highlight">108</i>&nbsp;    /**
+<i class="no-highlight">109</i>&nbsp;     * Will shoot a cannonball assigning this.parent as the cannonball&#39;s parent (must be Ship atm)
+<i class="no-highlight">110</i>&nbsp;     *
+<i class="no-highlight">111</i>&nbsp;     * @param dir the direction to shoot in
+<i class="no-highlight">112</i>&nbsp;     */
+<b class="nc"><i class="no-highlight">113</i>&nbsp;    public void shoot(Vector2 dir) {</b>
+<b class="nc"><i class="no-highlight">114</i>&nbsp;        if (ammo == 0) {</b>
+<i class="no-highlight">115</i>&nbsp;            return;
+<b class="nc"><i class="no-highlight">116</i>&nbsp;        }</b>
+<b class="nc"><i class="no-highlight">117</i>&nbsp;        if(!isUnlimitedAmmo)</b>
+<b class="nc"><i class="no-highlight">118</i>&nbsp;            ammo--;</b>
+<b class="nc"><i class="no-highlight">119</i>&nbsp;        if(!isShootEightDirections)</b>
+<b class="nc"><i class="no-highlight">120</i>&nbsp;            GameManager.shoot((Ship) parent, dir);</b>
+<b class="nc"><i class="no-highlight">121</i>&nbsp;        else{</b>
+<b class="nc"><i class="no-highlight">122</i>&nbsp;            GameManager.shoot((Ship) parent, new Vector2(0, 1));</b>
+<b class="nc"><i class="no-highlight">123</i>&nbsp;            GameManager.shoot((Ship) parent, new Vector2(0, -1));</b>
+<b class="nc"><i class="no-highlight">124</i>&nbsp;            GameManager.shoot((Ship) parent, new Vector2(1, 0));</b>
+<b class="nc"><i class="no-highlight">125</i>&nbsp;            GameManager.shoot((Ship) parent, new Vector2(-1, 0));</b>
+<b class="nc"><i class="no-highlight">126</i>&nbsp;            GameManager.shoot((Ship) parent, new Vector2(1, 1));</b>
+<b class="nc"><i class="no-highlight">127</i>&nbsp;            GameManager.shoot((Ship) parent, new Vector2(-1, 1));</b>
+<b class="nc"><i class="no-highlight">128</i>&nbsp;            GameManager.shoot((Ship) parent, new Vector2(1, -1));</b>
+<b class="nc"><i class="no-highlight">129</i>&nbsp;            GameManager.shoot((Ship) parent, new Vector2(-1, -1));</b>
+<i class="no-highlight">130</i>&nbsp;        }
+<i class="no-highlight">131</i>&nbsp;    }
+<i class="no-highlight">132</i>&nbsp;
+<i class="no-highlight">133</i>&nbsp;    /**
+<i class="no-highlight">134</i>&nbsp;     * Adds ammo
+<i class="no-highlight">135</i>&nbsp;     *
+<i class="no-highlight">136</i>&nbsp;     * @param newAmmo amount to add
+<i class="no-highlight">137</i>&nbsp;     */
+<b class="nc"><i class="no-highlight">138</i>&nbsp;    public static void addAmmo(int newAmmo) {</b>
+<b class="nc"><i class="no-highlight">139</i>&nbsp;        ammo += newAmmo;</b>
+<i class="no-highlight">140</i>&nbsp;    }
+<i class="no-highlight">141</i>&nbsp;
+<b class="fc"><i class="no-highlight">142</i>&nbsp;    public int getHealth() {</b>
+<b class="fc"><i class="no-highlight">143</i>&nbsp;        return health;</b>
+<i class="no-highlight">144</i>&nbsp;    }
+<i class="no-highlight">145</i>&nbsp;
+<b class="fc"><i class="no-highlight">146</i>&nbsp;    public void setHealth(int overrideHealth) {</b>
+<b class="fc"><i class="no-highlight">147</i>&nbsp;        health = overrideHealth;</b>
+<i class="no-highlight">148</i>&nbsp;    }
+<i class="no-highlight">149</i>&nbsp;
+<i class="no-highlight">150</i>&nbsp;    /**
+<i class="no-highlight">151</i>&nbsp;     * if dst to target is less than attack range
+<i class="no-highlight">152</i>&nbsp;     * target will be null if not in agro range
+<i class="no-highlight">153</i>&nbsp;     */
+<b class="nc"><i class="no-highlight">154</i>&nbsp;    public boolean canAttack() {</b>
+<b class="fc"><i class="no-highlight">155</i>&nbsp;        if (targets.peek() != null) {</b>
+<b class="fc"><i class="no-highlight">156</i>&nbsp;            final Ship p = (Ship) parent;</b>
+<b class="fc"><i class="no-highlight">157</i>&nbsp;            final Vector2 pos = p.getPosition();</b>
+<b class="fc"><i class="no-highlight">158</i>&nbsp;            final float dst = pos.dst(targets.peek().getPosition());</b>
+<b class="nc"><i class="no-highlight">159</i>&nbsp;            // withing attack range</b>
+<b class="fc"><i class="no-highlight">160</i>&nbsp;            return dst &lt; Ship.getAttackRange();</b>
+<b class="nc"><i class="no-highlight">161</i>&nbsp;        }</b>
+<b class="fc"><i class="no-highlight">162</i>&nbsp;        return false;</b>
+<i class="no-highlight">163</i>&nbsp;    }
+<i class="no-highlight">164</i>&nbsp;
+<i class="no-highlight">165</i>&nbsp;    /**
+<i class="no-highlight">166</i>&nbsp;     * if dst to target is &gt;= attack range
+<i class="no-highlight">167</i>&nbsp;     * target will be null if not in agro range
+<i class="no-highlight">168</i>&nbsp;     */
+<b class="nc"><i class="no-highlight">169</i>&nbsp;    public boolean isAgro() {</b>
+<b class="fc"><i class="no-highlight">170</i>&nbsp;        if (targets.peek() != null) {</b>
+<b class="fc"><i class="no-highlight">171</i>&nbsp;            final Ship p = (Ship) parent;</b>
+<b class="fc"><i class="no-highlight">172</i>&nbsp;            final Vector2 pos = p.getPosition();</b>
+<b class="fc"><i class="no-highlight">173</i>&nbsp;            final float dst = pos.dst(targets.peek().getPosition());</b>
+<b class="nc"><i class="no-highlight">174</i>&nbsp;            // out of attack range but in agro range</b>
+<b class="fc"><i class="no-highlight">175</i>&nbsp;            return dst &gt;= Ship.getAttackRange();</b>
+<b class="nc"><i class="no-highlight">176</i>&nbsp;        }</b>
+<b class="fc"><i class="no-highlight">177</i>&nbsp;        return false;</b>
+<i class="no-highlight">178</i>&nbsp;    }
+<i class="no-highlight">179</i>&nbsp;
+<b class="nc"><i class="no-highlight">180</i>&nbsp;    public Ship getTarget() {</b>
+<b class="fc"><i class="no-highlight">181</i>&nbsp;        return targets.peek();</b>
+<i class="no-highlight">182</i>&nbsp;    }
+<i class="no-highlight">183</i>&nbsp;
+<b class="nc"><i class="no-highlight">184</i>&nbsp;    public void removeTarget() {</b>
+<b class="fc"><i class="no-highlight">185</i>&nbsp;        targets.pop();</b>
+<i class="no-highlight">186</i>&nbsp;    }
+<i class="no-highlight">187</i>&nbsp;
+<b class="fc"><i class="no-highlight">188</i>&nbsp;    public boolean isAlive() {</b>
+<b class="fc"><i class="no-highlight">189</i>&nbsp;        return isAlive;</b>
+<i class="no-highlight">190</i>&nbsp;    }
+<i class="no-highlight">191</i>&nbsp;
+<i class="no-highlight">192</i>&nbsp;    /**
+<i class="no-highlight">193</i>&nbsp;     * Kill its self
+<i class="no-highlight">194</i>&nbsp;     */
+<b class="fc"><i class="no-highlight">195</i>&nbsp;    public void kill() {</b>
+<b class="fc"><i class="no-highlight">196</i>&nbsp;        health = 0;</b>
+<b class="fc"><i class="no-highlight">197</i>&nbsp;        isAlive = false;</b>
+<i class="no-highlight">198</i>&nbsp;    }
+<i class="no-highlight">199</i>&nbsp;
+<b class="fc"><i class="no-highlight">200</i>&nbsp;    public void setAmmo(int ammo) {</b>
+<b class="fc"><i class="no-highlight">201</i>&nbsp;        this.ammo = ammo;</b>
+<i class="no-highlight">202</i>&nbsp;    }
+<i class="no-highlight">203</i>&nbsp;
+<b class="fc"><i class="no-highlight">204</i>&nbsp;    public int getAmmo() {</b>
+<b class="fc"><i class="no-highlight">205</i>&nbsp;        return ammo;</b>
+<i class="no-highlight">206</i>&nbsp;    }
+<i class="no-highlight">207</i>&nbsp;
+<b class="nc"><i class="no-highlight">208</i>&nbsp;    public int targetCount() {</b>
+<b class="nc"><i class="no-highlight">209</i>&nbsp;        return targets.size();</b>
+<i class="no-highlight">210</i>&nbsp;    }
+<i class="no-highlight">211</i>&nbsp;
+<b class="nc"><i class="no-highlight">212</i>&nbsp;    public QueueFIFO&lt;Ship&gt; getTargets() {</b>
+<b class="fc"><i class="no-highlight">213</i>&nbsp;        return targets;</b>
+<i class="no-highlight">214</i>&nbsp;    }
+<b class="fc"><i class="no-highlight">215</i>&nbsp;</b>
+<b class="fc"><i class="no-highlight">216</i>&nbsp;    public int getPoints(){return points;}</b>
+<b class="nc"><i class="no-highlight">217</i>&nbsp;</b>
+<b class="fc"><i class="no-highlight">218</i>&nbsp;    public void addPoints(int value){points += value;}</b>
+<i class="no-highlight">219</i>&nbsp;}
 </div>
 </pre>
 </div>
@@ -317,7 +318,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-05-01 15:41</div>
+    <div style="float:right;">generated on 2022-05-03 11:14</div>
 </div>
 </body>
 </html>

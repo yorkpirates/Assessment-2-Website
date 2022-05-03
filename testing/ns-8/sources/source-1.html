@@ -116,131 +116,134 @@ Current scope:     <a href="../../index.html">all classes</a>
 <i class="no-highlight">15</i>&nbsp;import com.mygdx.game.Managers.QuestManager;
 <i class="no-highlight">16</i>&nbsp;import com.mygdx.game.Managers.ResourceManager;
 <i class="no-highlight">17</i>&nbsp;import com.mygdx.game.PirateGame;
-<i class="no-highlight">18</i>&nbsp;import com.sun.org.apache.xpath.internal.operations.Bool;
-<i class="no-highlight">19</i>&nbsp;
-<i class="no-highlight">20</i>&nbsp;import static com.mygdx.utils.Constants.VIEWPORT_HEIGHT;
-<i class="no-highlight">21</i>&nbsp;
-<i class="no-highlight">22</i>&nbsp;/**
-<i class="no-highlight">23</i>&nbsp; * Contains widgets defining the game end screen.
-<i class="no-highlight">24</i>&nbsp; */
-<i class="no-highlight">25</i>&nbsp;public class EndScreen extends Page {
-<i class="no-highlight">26</i>&nbsp;    Label wonText;
-<i class="no-highlight">27</i>&nbsp;    Label playerStats;
-<i class="no-highlight">28</i>&nbsp;
-<i class="no-highlight">29</i>&nbsp;    Integer questsNeeded ;
-<i class="no-highlight">30</i>&nbsp;    Integer pointsNeeded;
-<i class="no-highlight">31</i>&nbsp;
-<i class="no-highlight">32</i>&nbsp;    public EndScreen(PirateGame game) {
-<b class="nc"><i class="no-highlight">33</i>&nbsp;        super(game);</b>
-<i class="no-highlight">34</i>&nbsp;    }
-<i class="no-highlight">35</i>&nbsp;
-<i class="no-highlight">36</i>&nbsp;    /**
-<i class="no-highlight">37</i>&nbsp;     * Set game end screen status to report a win.
-<i class="no-highlight">38</i>&nbsp;     */
-<i class="no-highlight">39</i>&nbsp;    public void win() {
-<b class="nc"><i class="no-highlight">40</i>&nbsp;        wonText.setText(&quot;Congrats You Have Won&quot;);</b>
-<i class="no-highlight">41</i>&nbsp;    }
-<i class="no-highlight">42</i>&nbsp;
-<i class="no-highlight">43</i>&nbsp;    /**
-<i class="no-highlight">44</i>&nbsp;     * Create game end screen widgets, initialised to game loss status.
-<i class="no-highlight">45</i>&nbsp;     */
-<i class="no-highlight">46</i>&nbsp;    @Override
-<i class="no-highlight">47</i>&nbsp;    protected void CreateActors() {
-<b class="nc"><i class="no-highlight">48</i>&nbsp;        Table t = new Table();</b>
-<b class="nc"><i class="no-highlight">49</i>&nbsp;        t.setBackground(new TextureRegionDrawable(ResourceManager.getTexture(&quot;menuBG.jpg&quot;)));</b>
-<i class="no-highlight">50</i>&nbsp;
-<b class="nc"><i class="no-highlight">51</i>&nbsp;        float space = VIEWPORT_HEIGHT * 0.25f;</b>
-<b class="nc"><i class="no-highlight">52</i>&nbsp;        t.setFillParent(true);</b>
-<b class="nc"><i class="no-highlight">53</i>&nbsp;        actors.add(t);</b>
-<b class="nc"><i class="no-highlight">54</i>&nbsp;        wonText = new Label(&quot;You have lost&quot;, parent.skin);</b>
-<b class="nc"><i class="no-highlight">55</i>&nbsp;        wonText.setFontScale(2);</b>
-<b class="nc"><i class="no-highlight">56</i>&nbsp;        t.top();</b>
-<b class="nc"><i class="no-highlight">57</i>&nbsp;        t.add(wonText).top().spaceBottom(space);</b>
-<b class="nc"><i class="no-highlight">58</i>&nbsp;        t.row();</b>
-<b class="nc"><i class="no-highlight">59</i>&nbsp;        playerStats = new Label(&quot;Player Stats:\n&quot;, parent.skin);</b>
-<b class="nc"><i class="no-highlight">60</i>&nbsp;        t.add(playerStats).spaceBottom(space);</b>
-<b class="nc"><i class="no-highlight">61</i>&nbsp;        t.row();</b>
-<b class="nc"><i class="no-highlight">62</i>&nbsp;        TextButton b = new TextButton(&quot;Exit&quot;, parent.skin);</b>
-<b class="nc"><i class="no-highlight">63</i>&nbsp;        b.addListener(new ChangeListener() {</b>
-<i class="no-highlight">64</i>&nbsp;            @Override
-<i class="no-highlight">65</i>&nbsp;            public void changed(ChangeEvent event, Actor actor) {
-<b class="nc"><i class="no-highlight">66</i>&nbsp;                Gdx.app.exit();</b>
-<b class="nc"><i class="no-highlight">67</i>&nbsp;                System.exit(0);</b>
-<i class="no-highlight">68</i>&nbsp;            }
-<i class="no-highlight">69</i>&nbsp;        });
-<b class="nc"><i class="no-highlight">70</i>&nbsp;        t.add(b);</b>
-<i class="no-highlight">71</i>&nbsp;    }
-<i class="no-highlight">72</i>&nbsp;
-<i class="no-highlight">73</i>&nbsp;    @Override
-<i class="no-highlight">74</i>&nbsp;    protected void update() {
-<b class="nc"><i class="no-highlight">75</i>&nbsp;        super.update();</b>
-<i class="no-highlight">76</i>&nbsp;
-<b class="nc"><i class="no-highlight">77</i>&nbsp;        if (Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)) {</b>
-<b class="nc"><i class="no-highlight">78</i>&nbsp;            Gdx.app.exit();</b>
-<b class="nc"><i class="no-highlight">79</i>&nbsp;            System.exit(0);</b>
-<i class="no-highlight">80</i>&nbsp;        }
-<i class="no-highlight">81</i>&nbsp;
-<i class="no-highlight">82</i>&nbsp;    }
-<i class="no-highlight">83</i>&nbsp;
-<i class="no-highlight">84</i>&nbsp;    /**
-<i class="no-highlight">85</i>&nbsp;     * Get player stats such as plunder etc. and display game end screen.
-<i class="no-highlight">86</i>&nbsp;     */
-<i class="no-highlight">87</i>&nbsp;    @Override
-<i class="no-highlight">88</i>&nbsp;    public void show() {
-<b class="nc"><i class="no-highlight">89</i>&nbsp;        super.show();</b>
-<b class="nc"><i class="no-highlight">90</i>&nbsp;        if(WinCheck()){</b>
-<b class="nc"><i class="no-highlight">91</i>&nbsp;            win();</b>
-<i class="no-highlight">92</i>&nbsp;        }
-<b class="nc"><i class="no-highlight">93</i>&nbsp;        Player p = GameManager.getPlayer();</b>
-<b class="nc"><i class="no-highlight">94</i>&nbsp;        String stats = String.format(&quot;Health: %s\nAmmo: %s\nPlunder: %s\nPoints: %s/%s\nQuests Completed: %s/%s&quot;, p.getHealth(), p.getAmmo(), p.getPlunder(),p.getComponent(Pirate.class).getPoints(),pointsNeeded,QuestManager.numCompleted,questsNeeded);</b>
-<b class="nc"><i class="no-highlight">95</i>&nbsp;        playerStats.setText(stats);</b>
+<i class="no-highlight">18</i>&nbsp;
+<i class="no-highlight">19</i>&nbsp;import static com.mygdx.utils.Constants.VIEWPORT_HEIGHT;
+<i class="no-highlight">20</i>&nbsp;
+<i class="no-highlight">21</i>&nbsp;/**
+<i class="no-highlight">22</i>&nbsp; * Contains widgets defining the game end screen.
+<i class="no-highlight">23</i>&nbsp; */
+<i class="no-highlight">24</i>&nbsp;public class EndScreen extends Page {
+<i class="no-highlight">25</i>&nbsp;    Label wonText;
+<i class="no-highlight">26</i>&nbsp;    Label playerStats;
+<i class="no-highlight">27</i>&nbsp;
+<i class="no-highlight">28</i>&nbsp;    Integer questsNeeded ;
+<i class="no-highlight">29</i>&nbsp;    Integer pointsNeeded;
+<i class="no-highlight">30</i>&nbsp;
+<i class="no-highlight">31</i>&nbsp;    public EndScreen(PirateGame game) {
+<b class="nc"><i class="no-highlight">32</i>&nbsp;        super(game);</b>
+<i class="no-highlight">33</i>&nbsp;    }
+<i class="no-highlight">34</i>&nbsp;
+<i class="no-highlight">35</i>&nbsp;    /**
+<i class="no-highlight">36</i>&nbsp;     * Set game end screen status to report a win.
+<i class="no-highlight">37</i>&nbsp;     */
+<i class="no-highlight">38</i>&nbsp;    public void win() {
+<b class="nc"><i class="no-highlight">39</i>&nbsp;        wonText.setText(&quot;Congrats You Have Won&quot;);</b>
+<i class="no-highlight">40</i>&nbsp;    }
+<i class="no-highlight">41</i>&nbsp;
+<i class="no-highlight">42</i>&nbsp;    /**
+<i class="no-highlight">43</i>&nbsp;     * Create game end screen widgets, initialised to game loss status.
+<i class="no-highlight">44</i>&nbsp;     */
+<i class="no-highlight">45</i>&nbsp;    @Override
+<i class="no-highlight">46</i>&nbsp;    protected void CreateActors() {
+<b class="nc"><i class="no-highlight">47</i>&nbsp;        Table t = new Table();</b>
+<b class="nc"><i class="no-highlight">48</i>&nbsp;        t.setBackground(new TextureRegionDrawable(ResourceManager.getTexture(&quot;menuBG.jpg&quot;)));</b>
+<i class="no-highlight">49</i>&nbsp;
+<b class="nc"><i class="no-highlight">50</i>&nbsp;        float space = VIEWPORT_HEIGHT * 0.25f;</b>
+<b class="nc"><i class="no-highlight">51</i>&nbsp;        t.setFillParent(true);</b>
+<b class="nc"><i class="no-highlight">52</i>&nbsp;        actors.add(t);</b>
+<b class="nc"><i class="no-highlight">53</i>&nbsp;        wonText = new Label(&quot;You have lost&quot;, parent.skin);</b>
+<b class="nc"><i class="no-highlight">54</i>&nbsp;        wonText.setFontScale(2);</b>
+<b class="nc"><i class="no-highlight">55</i>&nbsp;        t.top();</b>
+<b class="nc"><i class="no-highlight">56</i>&nbsp;        t.add(wonText).top().spaceBottom(space);</b>
+<b class="nc"><i class="no-highlight">57</i>&nbsp;        t.row();</b>
+<b class="nc"><i class="no-highlight">58</i>&nbsp;        playerStats = new Label(&quot;Player Stats:\n&quot;, parent.skin);</b>
+<b class="nc"><i class="no-highlight">59</i>&nbsp;        t.add(playerStats).spaceBottom(space);</b>
+<b class="nc"><i class="no-highlight">60</i>&nbsp;        t.row();</b>
+<b class="nc"><i class="no-highlight">61</i>&nbsp;        TextButton b = new TextButton(&quot;Exit&quot;, parent.skin);</b>
+<b class="nc"><i class="no-highlight">62</i>&nbsp;        b.addListener(new ChangeListener() {</b>
+<i class="no-highlight">63</i>&nbsp;            @Override
+<i class="no-highlight">64</i>&nbsp;            public void changed(ChangeEvent event, Actor actor) {
+<b class="nc"><i class="no-highlight">65</i>&nbsp;                Gdx.app.exit();</b>
+<b class="nc"><i class="no-highlight">66</i>&nbsp;                System.exit(0);</b>
+<i class="no-highlight">67</i>&nbsp;            }
+<i class="no-highlight">68</i>&nbsp;        });
+<b class="nc"><i class="no-highlight">69</i>&nbsp;        t.add(b);</b>
+<i class="no-highlight">70</i>&nbsp;    }
+<i class="no-highlight">71</i>&nbsp;
+<i class="no-highlight">72</i>&nbsp;    @Override
+<i class="no-highlight">73</i>&nbsp;    protected void update() {
+<b class="nc"><i class="no-highlight">74</i>&nbsp;        super.update();</b>
+<i class="no-highlight">75</i>&nbsp;
+<b class="nc"><i class="no-highlight">76</i>&nbsp;        if (Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)) {</b>
+<b class="nc"><i class="no-highlight">77</i>&nbsp;            Gdx.app.exit();</b>
+<b class="nc"><i class="no-highlight">78</i>&nbsp;            System.exit(0);</b>
+<i class="no-highlight">79</i>&nbsp;        }
+<i class="no-highlight">80</i>&nbsp;
+<i class="no-highlight">81</i>&nbsp;    }
+<i class="no-highlight">82</i>&nbsp;
+<i class="no-highlight">83</i>&nbsp;    /**
+<i class="no-highlight">84</i>&nbsp;     * Get player stats such as plunder etc. and display game end screen.
+<i class="no-highlight">85</i>&nbsp;     */
+<i class="no-highlight">86</i>&nbsp;    @Override
+<i class="no-highlight">87</i>&nbsp;    public void show() {
+<b class="nc"><i class="no-highlight">88</i>&nbsp;        super.show();</b>
+<b class="nc"><i class="no-highlight">89</i>&nbsp;        if(WinCheck()){</b>
+<b class="nc"><i class="no-highlight">90</i>&nbsp;            win();</b>
+<i class="no-highlight">91</i>&nbsp;        }
+<b class="nc"><i class="no-highlight">92</i>&nbsp;        Player p = GameManager.getPlayer();</b>
+<b class="nc"><i class="no-highlight">93</i>&nbsp;        String stats = String.format(&quot;Health: %s\nAmmo: %s\nPlunder: %s\nPoints: %s/%s\nQuests Completed: %s/%s&quot;, p.getHealth(), p.getAmmo(), p.getPlunder(),p.getComponent(Pirate.class).getPoints(),pointsNeeded,QuestManager.numCompleted,questsNeeded);</b>
+<b class="nc"><i class="no-highlight">94</i>&nbsp;        playerStats.setText(stats);</b>
+<i class="no-highlight">95</i>&nbsp;
 <i class="no-highlight">96</i>&nbsp;
-<i class="no-highlight">97</i>&nbsp;
-<i class="no-highlight">98</i>&nbsp;    }
-<i class="no-highlight">99</i>&nbsp;
-<i class="no-highlight">100</i>&nbsp;    /**
-<i class="no-highlight">101</i>&nbsp;     * Checks if the player meets the win conditions based on the difficulty level
-<i class="no-highlight">102</i>&nbsp;     * @return A Boolean based on whether the player has won
-<i class="no-highlight">103</i>&nbsp;     */
-<i class="no-highlight">104</i>&nbsp;    private boolean WinCheck(){
-<b class="nc"><i class="no-highlight">105</i>&nbsp;        Boolean result = false;</b>
-<b class="nc"><i class="no-highlight">106</i>&nbsp;        questsNeeded = 0;</b>
-<b class="nc"><i class="no-highlight">107</i>&nbsp;        pointsNeeded = 0;</b>
-<b class="nc"><i class="no-highlight">108</i>&nbsp;        switch (DifficultyManager.getDifficulty()){</b>
-<i class="no-highlight">109</i>&nbsp;            case &quot;e&quot;:
-<b class="nc"><i class="no-highlight">110</i>&nbsp;                questsNeeded =1;</b>
-<b class="nc"><i class="no-highlight">111</i>&nbsp;                pointsNeeded = 100;</b>
-<b class="nc"><i class="no-highlight">112</i>&nbsp;                break;</b>
-<i class="no-highlight">113</i>&nbsp;
-<i class="no-highlight">114</i>&nbsp;            case &quot;n&quot;:
-<b class="nc"><i class="no-highlight">115</i>&nbsp;                questsNeeded = 3;</b>
-<b class="nc"><i class="no-highlight">116</i>&nbsp;                pointsNeeded = 500;</b>
-<b class="nc"><i class="no-highlight">117</i>&nbsp;                break;</b>
+<i class="no-highlight">97</i>&nbsp;    }
+<i class="no-highlight">98</i>&nbsp;
+<i class="no-highlight">99</i>&nbsp;    /**NEW
+<i class="no-highlight">100</i>&nbsp;     * Checks if the player meets the win conditions based on the difficulty level
+<i class="no-highlight">101</i>&nbsp;     * @return A Boolean based on whether the player has won
+<i class="no-highlight">102</i>&nbsp;     */
+<i class="no-highlight">103</i>&nbsp;    private boolean WinCheck(){
+<b class="nc"><i class="no-highlight">104</i>&nbsp;        Boolean result = false;</b>
+<b class="nc"><i class="no-highlight">105</i>&nbsp;        questsNeeded = 0;</b>
+<b class="nc"><i class="no-highlight">106</i>&nbsp;        pointsNeeded = 0;</b>
+<b class="nc"><i class="no-highlight">107</i>&nbsp;        switch (DifficultyManager.getDifficulty()){</b>
+<i class="no-highlight">108</i>&nbsp;            case &quot;e&quot;:
+<b class="nc"><i class="no-highlight">109</i>&nbsp;                questsNeeded =1;</b>
+<b class="nc"><i class="no-highlight">110</i>&nbsp;                pointsNeeded = 100;</b>
+<b class="nc"><i class="no-highlight">111</i>&nbsp;                break;</b>
+<i class="no-highlight">112</i>&nbsp;
+<i class="no-highlight">113</i>&nbsp;            case &quot;n&quot;:
+<b class="nc"><i class="no-highlight">114</i>&nbsp;                questsNeeded = 3;</b>
+<b class="nc"><i class="no-highlight">115</i>&nbsp;                pointsNeeded = 500;</b>
+<b class="nc"><i class="no-highlight">116</i>&nbsp;                break;</b>
+<i class="no-highlight">117</i>&nbsp;
 <i class="no-highlight">118</i>&nbsp;
-<i class="no-highlight">119</i>&nbsp;
-<i class="no-highlight">120</i>&nbsp;            case &quot;h&quot;:
-<b class="nc"><i class="no-highlight">121</i>&nbsp;                questsNeeded = 5;</b>
-<b class="nc"><i class="no-highlight">122</i>&nbsp;                pointsNeeded = 1000;</b>
-<i class="no-highlight">123</i>&nbsp;                break;
-<i class="no-highlight">124</i>&nbsp;
-<i class="no-highlight">125</i>&nbsp;        }
-<b class="nc"><i class="no-highlight">126</i>&nbsp;        if(QuestManager.numCompleted&gt;=questsNeeded){</b>
-<b class="nc"><i class="no-highlight">127</i>&nbsp;            if(GameManager.getPlayer().getComponent(Pirate.class).getPoints()&gt;pointsNeeded){</b>
-<b class="nc"><i class="no-highlight">128</i>&nbsp;                result = true;</b>
-<i class="no-highlight">129</i>&nbsp;            }
-<i class="no-highlight">130</i>&nbsp;        }
-<b class="nc"><i class="no-highlight">131</i>&nbsp;        return result;</b>
-<i class="no-highlight">132</i>&nbsp;
-<i class="no-highlight">133</i>&nbsp;    }
+<i class="no-highlight">119</i>&nbsp;            case &quot;h&quot;:
+<b class="nc"><i class="no-highlight">120</i>&nbsp;                questsNeeded = 5;</b>
+<b class="nc"><i class="no-highlight">121</i>&nbsp;                pointsNeeded = 1000;</b>
+<i class="no-highlight">122</i>&nbsp;                break;
+<i class="no-highlight">123</i>&nbsp;
+<i class="no-highlight">124</i>&nbsp;        }
+<b class="nc"><i class="no-highlight">125</i>&nbsp;        if(QuestManager.numCompleted&gt;=questsNeeded){</b>
+<b class="nc"><i class="no-highlight">126</i>&nbsp;            if(GameManager.getPlayer().getComponent(Pirate.class).getPoints()&gt;pointsNeeded){</b>
+<b class="nc"><i class="no-highlight">127</i>&nbsp;                result = true;</b>
+<i class="no-highlight">128</i>&nbsp;            }
+<i class="no-highlight">129</i>&nbsp;        }
+<b class="nc"><i class="no-highlight">130</i>&nbsp;        return result;</b>
+<i class="no-highlight">131</i>&nbsp;
+<i class="no-highlight">132</i>&nbsp;    }
+<i class="no-highlight">133</i>&nbsp;
 <i class="no-highlight">134</i>&nbsp;
-<i class="no-highlight">135</i>&nbsp;
-<i class="no-highlight">136</i>&nbsp;    @Override
-<i class="no-highlight">137</i>&nbsp;    public void resize(int width, int height) {
-<b class="nc"><i class="no-highlight">138</i>&nbsp;        super.resize(width, height);</b>
-<b class="nc"><i class="no-highlight">139</i>&nbsp;        Table t = (Table) actors.get(0);</b>
-<b class="nc"><i class="no-highlight">140</i>&nbsp;        t.setBackground(new TextureRegionDrawable(ResourceManager.getTexture(&quot;menuBG.jpg&quot;))); // prevent the bg being stretched</b>
-<i class="no-highlight">141</i>&nbsp;    }
-<i class="no-highlight">142</i>&nbsp;}
+<i class="no-highlight">135</i>&nbsp;    /**
+<i class="no-highlight">136</i>&nbsp;     * @param width  new dim x
+<i class="no-highlight">137</i>&nbsp;     * @param height new dom y
+<i class="no-highlight">138</i>&nbsp;     */
+<i class="no-highlight">139</i>&nbsp;    @Override
+<i class="no-highlight">140</i>&nbsp;    public void resize(int width, int height) {
+<b class="nc"><i class="no-highlight">141</i>&nbsp;        super.resize(width, height);</b>
+<b class="nc"><i class="no-highlight">142</i>&nbsp;        Table t = (Table) actors.get(0);</b>
+<b class="nc"><i class="no-highlight">143</i>&nbsp;        t.setBackground(new TextureRegionDrawable(ResourceManager.getTexture(&quot;menuBG.jpg&quot;))); // prevent the bg being stretched</b>
+<i class="no-highlight">144</i>&nbsp;    }
+<i class="no-highlight">145</i>&nbsp;}
 </div>
 </pre>
 </div>
@@ -267,7 +270,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-05-01 15:41</div>
+    <div style="float:right;">generated on 2022-05-03 11:14</div>
 </div>
 </body>
 </html>

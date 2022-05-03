@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html id="htmlId">
 <head>
-  <title>Coverage Report > RenderingManagerTest</title>
+  <title>Coverage Report > CannonBallTest</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/highlight-idea.css";
@@ -17,10 +17,10 @@
 <div class="breadCrumbs">
 Current scope:     <a href="../../index.html">all classes</a>
     <span class="separator">|</span>
-    <a href="../index.html">io.team9.game.tests.Managers</a>
+    <a href="../index.html">io.team9.game.tests.Entitys</a>
 </div>
 
-<h1>Coverage Summary for Class: RenderingManagerTest (io.team9.game.tests.Managers)</h1>
+<h1>Coverage Summary for Class: CannonBallTest (io.team9.game.tests.Entitys)</h1>
 
 <table class="coverageStats">
 <tr>
@@ -39,7 +39,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 </th>
 </tr>
 <tr>
-  <td class="name">RenderingManagerTest</td>
+  <td class="name">CannonBallTest</td>
 <td class="coverageStat">
   <span class="percent">
     100%
@@ -61,7 +61,7 @@ Current scope:     <a href="../../index.html">all classes</a>
     100%
   </span>
   <span class="absValue">
-    (5/5)
+    (10/10)
   </span>
 </td>
 </tr>
@@ -73,36 +73,34 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 
 <pre>
-<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;package io.team9.game.tests.Managers;
-<i class="no-highlight">2</i>&nbsp;
-<i class="no-highlight">3</i>&nbsp;import com.badlogic.gdx.graphics.OrthographicCamera;
-<i class="no-highlight">4</i>&nbsp;import com.badlogic.gdx.graphics.g2d.Batch;
-<i class="no-highlight">5</i>&nbsp;import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-<i class="no-highlight">6</i>&nbsp;import com.mygdx.game.Managers.DifficultyManager;
-<i class="no-highlight">7</i>&nbsp;import com.mygdx.game.Managers.RenderingManager;
-<i class="no-highlight">8</i>&nbsp;import com.mygdx.utils.Constants;
-<i class="no-highlight">9</i>&nbsp;import io.team9.game.tests.GdxTestRunner;
-<i class="no-highlight">10</i>&nbsp;import org.junit.Test;
-<i class="no-highlight">11</i>&nbsp;import org.junit.runner.RunWith;
-<i class="no-highlight">12</i>&nbsp;
-<i class="no-highlight">13</i>&nbsp;import static org.junit.Assert.assertEquals;
-<i class="no-highlight">14</i>&nbsp;
-<i class="no-highlight">15</i>&nbsp;@RunWith(GdxTestRunner.class)
-<b class="fc"><i class="no-highlight">16</i>&nbsp;public class RenderingManagerTest {</b>
-<i class="no-highlight">17</i>&nbsp;    
-<i class="no-highlight">18</i>&nbsp;
-<i class="no-highlight">19</i>&nbsp;    @Test
-<i class="no-highlight">20</i>&nbsp;    public void testSetCamera() {
-<b class="fc"><i class="no-highlight">21</i>&nbsp;        RenderingManager manager = new RenderingManager();</b>
-<b class="fc"><i class="no-highlight">22</i>&nbsp;        OrthographicCamera cam = new OrthographicCamera();</b>
-<b class="fc"><i class="no-highlight">23</i>&nbsp;        manager.setCamera(cam);</b>
-<b class="fc"><i class="no-highlight">24</i>&nbsp;        assertEquals(&quot;true&quot;, manager.getCamera(), cam);</b>
-<i class="no-highlight">25</i>&nbsp;    }
-<i class="no-highlight">26</i>&nbsp;
-<i class="no-highlight">27</i>&nbsp;
-<i class="no-highlight">28</i>&nbsp;
-<i class="no-highlight">29</i>&nbsp;
-<i class="no-highlight">30</i>&nbsp;}
+<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;package io.team9.game.tests.Entitys;
+<i class="no-highlight">2</i>&nbsp;import com.badlogic.gdx.math.Vector2;
+<i class="no-highlight">3</i>&nbsp;import com.mygdx.game.Components.RigidBody;
+<i class="no-highlight">4</i>&nbsp;import com.mygdx.game.Components.Transform;
+<i class="no-highlight">5</i>&nbsp;import com.mygdx.game.Entitys.CannonBall;
+<i class="no-highlight">6</i>&nbsp;import com.mygdx.game.Managers.PhysicsManager;
+<i class="no-highlight">7</i>&nbsp;import io.team9.game.tests.GdxTestRunner;
+<i class="no-highlight">8</i>&nbsp;import org.junit.Test;
+<i class="no-highlight">9</i>&nbsp;import org.junit.runner.RunWith;
+<i class="no-highlight">10</i>&nbsp;
+<i class="no-highlight">11</i>&nbsp;
+<i class="no-highlight">12</i>&nbsp;import static org.junit.Assert.*;
+<i class="no-highlight">13</i>&nbsp;@RunWith(GdxTestRunner.class)
+<b class="fc"><i class="no-highlight">14</i>&nbsp;public class CannonBallTest {</b>
+<i class="no-highlight">15</i>&nbsp;
+<i class="no-highlight">16</i>&nbsp;    @Test
+<i class="no-highlight">17</i>&nbsp;    public void deathTest(){
+<b class="fc"><i class="no-highlight">18</i>&nbsp;        PhysicsManager.Initialize();</b>
+<b class="fc"><i class="no-highlight">19</i>&nbsp;        CannonBall ball = new CannonBall();</b>
+<b class="fc"><i class="no-highlight">20</i>&nbsp;        ball.kill();</b>
+<b class="fc"><i class="no-highlight">21</i>&nbsp;        ball.update();</b>
+<b class="fc"><i class="no-highlight">22</i>&nbsp;        Vector2 loc = new Vector2(10005,10005);</b>
+<b class="fc"><i class="no-highlight">23</i>&nbsp;        assertEquals(loc,ball.getComponent(Transform.class).getPosition());</b>
+<b class="fc"><i class="no-highlight">24</i>&nbsp;        loc.x=0;</b>
+<b class="fc"><i class="no-highlight">25</i>&nbsp;        loc.y=0;</b>
+<b class="fc"><i class="no-highlight">26</i>&nbsp;        assertEquals(loc,ball.getComponent(RigidBody.class).getVelocity());</b>
+<i class="no-highlight">27</i>&nbsp;    }
+<i class="no-highlight">28</i>&nbsp;}
 </div>
 </pre>
 </div>
@@ -129,7 +127,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-05-01 15:41</div>
+    <div style="float:right;">generated on 2022-05-03 11:14</div>
 </div>
 </body>
 </html>

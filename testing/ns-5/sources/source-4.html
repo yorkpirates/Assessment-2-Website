@@ -58,10 +58,10 @@ Current scope:     <a href="../../index.html">all classes</a>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    82.7%
+    79.5%
   </span>
   <span class="absValue">
-    (67/81)
+    (89/112)
   </span>
 </td>
 </tr>
@@ -99,7 +99,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 <i class="no-highlight">24</i>&nbsp;    public static ArrayList&lt;Weather&gt; weathers;
 <i class="no-highlight">25</i>&nbsp;    public static ArrayList&lt;Monster&gt; monsters;
 <i class="no-highlight">26</i>&nbsp;
-<i class="no-highlight">27</i>&nbsp;    private static final int cacheSize = 20;
+<i class="no-highlight">27</i>&nbsp;    private static final int cacheSize = 50;
 <i class="no-highlight">28</i>&nbsp;    private static ArrayList&lt;CannonBall&gt; ballCache;
 <i class="no-highlight">29</i>&nbsp;    private static ArrayList&lt;CannonBallCollege&gt; ballCache2;
 <i class="no-highlight">30</i>&nbsp;    private static int currentElement;
@@ -174,149 +174,157 @@ Current scope:     <a href="../../index.html">all classes</a>
 <b class="fc"><i class="no-highlight">99</i>&nbsp;        CreatePlayer();</b>
 <b class="fc"><i class="no-highlight">100</i>&nbsp;        CreateWeather();</b>
 <b class="fc"><i class="no-highlight">101</i>&nbsp;        CreateMonster();</b>
-<b class="fc"><i class="no-highlight">102</i>&nbsp;        final int cnt = settings.get(&quot;factionDefaults&quot;).getInt(&quot;shipCount&quot;);</b>
-<b class="fc"><i class="no-highlight">103</i>&nbsp;        for (int i = 0; i &lt; factions.size(); i++) {</b>
-<b class="fc"><i class="no-highlight">104</i>&nbsp;            CreateCollege(i + 1);</b>
-<b class="fc"><i class="no-highlight">105</i>&nbsp;            for (int j = 0; j &lt; cnt; j++) {</b>
-<i class="no-highlight">106</i>&nbsp;                // prevents halifax from having shipcount + player
-<b class="fc"><i class="no-highlight">107</i>&nbsp;                if (i == 0 &amp;&amp; j &gt; cnt - 2) {</b>
-<b class="fc"><i class="no-highlight">108</i>&nbsp;                    break;</b>
-<i class="no-highlight">109</i>&nbsp;                }
-<b class="fc"><i class="no-highlight">110</i>&nbsp;                NPCShip s = CreateNPCShip(i + 1);</b>
-<b class="fc"><i class="no-highlight">111</i>&nbsp;                s.getComponent(Transform.class).setPosition(getFaction(i + 1).getSpawnPos());</b>
-<i class="no-highlight">112</i>&nbsp;            }
-<i class="no-highlight">113</i>&nbsp;        }
-<i class="no-highlight">114</i>&nbsp;    }
+<b class="fc"><i class="no-highlight">102</i>&nbsp;</b>
+<b class="fc"><i class="no-highlight">103</i>&nbsp;        final int cnt = settings.get(&quot;factionDefaults&quot;).getInt(&quot;shipCount&quot;);</b>
+<b class="fc"><i class="no-highlight">104</i>&nbsp;        for (int i = 0; i &lt; factions.size(); i++) {</b>
+<b class="fc"><i class="no-highlight">105</i>&nbsp;            CreateCollege(i + 1);</b>
+<b class="fc"><i class="no-highlight">106</i>&nbsp;            for (int j = 0; j &lt; cnt; j++) {</b>
+<b class="fc"><i class="no-highlight">107</i>&nbsp;                // prevents halifax from having shipcount + player</b>
+<b class="fc"><i class="no-highlight">108</i>&nbsp;                if (i == 0 &amp;&amp; j &gt; cnt - 2) {</b>
+<b class="fc"><i class="no-highlight">109</i>&nbsp;                    break;</b>
+<b class="fc"><i class="no-highlight">110</i>&nbsp;                }</b>
+<b class="fc"><i class="no-highlight">111</i>&nbsp;                NPCShip s = CreateNPCShip(i + 1);</b>
+<b class="fc"><i class="no-highlight">112</i>&nbsp;                s.getComponent(Transform.class).setPosition(getFaction(i + 1).getSpawnPos());</b>
+<i class="no-highlight">113</i>&nbsp;            }
+<i class="no-highlight">114</i>&nbsp;        }
 <i class="no-highlight">115</i>&nbsp;
-<i class="no-highlight">116</i>&nbsp;    /**
-<i class="no-highlight">117</i>&nbsp;     * Creates player that belongs the faction with id 1
-<i class="no-highlight">118</i>&nbsp;     */
-<i class="no-highlight">119</i>&nbsp;    public static void CreatePlayer() {
-<b class="fc"><i class="no-highlight">120</i>&nbsp;        tryInit();</b>
-<b class="fc"><i class="no-highlight">121</i>&nbsp;        Player p = new Player();</b>
-<b class="fc"><i class="no-highlight">122</i>&nbsp;        p.setFaction(1);</b>
-<b class="fc"><i class="no-highlight">123</i>&nbsp;        ships.add(p);</b>
-<i class="no-highlight">124</i>&nbsp;    }
-<i class="no-highlight">125</i>&nbsp;
-<i class="no-highlight">126</i>&nbsp;    /**
-<i class="no-highlight">127</i>&nbsp;     * Creates monster
-<i class="no-highlight">128</i>&nbsp;     */
-<i class="no-highlight">129</i>&nbsp;    public static void CreateMonster() {
-<b class="fc"><i class="no-highlight">130</i>&nbsp;        tryInit();</b>
-<b class="fc"><i class="no-highlight">131</i>&nbsp;        Monster m = new Monster();</b>
-<b class="fc"><i class="no-highlight">132</i>&nbsp;        monsters.add(m);</b>
-<i class="no-highlight">133</i>&nbsp;    }
-<i class="no-highlight">134</i>&nbsp;
-<i class="no-highlight">135</i>&nbsp;    /**
-<i class="no-highlight">136</i>&nbsp;     * Creates weather
-<i class="no-highlight">137</i>&nbsp;     */
-<i class="no-highlight">138</i>&nbsp;    public static Weather CreateWeather() {
-<b class="fc"><i class="no-highlight">139</i>&nbsp;        tryInit();</b>
-<b class="fc"><i class="no-highlight">140</i>&nbsp;        Weather e = new Weather();</b>
-<b class="fc"><i class="no-highlight">141</i>&nbsp;        weathers.add(e);</b>
-<b class="fc"><i class="no-highlight">142</i>&nbsp;        return e;</b>
-<i class="no-highlight">143</i>&nbsp;    }
-<i class="no-highlight">144</i>&nbsp;
-<i class="no-highlight">145</i>&nbsp;    /**
-<i class="no-highlight">146</i>&nbsp;     * Creates an NPC ship with the given faction
-<i class="no-highlight">147</i>&nbsp;     *
-<i class="no-highlight">148</i>&nbsp;     * @param factionId desired faction
-<i class="no-highlight">149</i>&nbsp;     * @return the created ship
-<i class="no-highlight">150</i>&nbsp;     */
-<i class="no-highlight">151</i>&nbsp;    public static NPCShip CreateNPCShip(int factionId) {
-<b class="fc"><i class="no-highlight">152</i>&nbsp;        tryInit();</b>
-<b class="fc"><i class="no-highlight">153</i>&nbsp;        NPCShip e = new NPCShip();</b>
-<b class="fc"><i class="no-highlight">154</i>&nbsp;        e.setFaction(factionId);</b>
-<b class="fc"><i class="no-highlight">155</i>&nbsp;        ships.add(e);</b>
-<b class="fc"><i class="no-highlight">156</i>&nbsp;        return e;</b>
-<i class="no-highlight">157</i>&nbsp;    }
-<i class="no-highlight">158</i>&nbsp;
-<i class="no-highlight">159</i>&nbsp;
-<i class="no-highlight">160</i>&nbsp;    public static void addNPCMyShip(){
-<b class="nc"><i class="no-highlight">161</i>&nbsp;        NPCShip e = new NPCShip();</b>
-<b class="nc"><i class="no-highlight">162</i>&nbsp;        e.setFaction(1);</b>
-<b class="nc"><i class="no-highlight">163</i>&nbsp;        ships.add(e);</b>
-<i class="no-highlight">164</i>&nbsp;    }
-<i class="no-highlight">165</i>&nbsp;
-<i class="no-highlight">166</i>&nbsp;    /**
-<i class="no-highlight">167</i>&nbsp;     * Creates the world map
-<i class="no-highlight">168</i>&nbsp;     *
-<i class="no-highlight">169</i>&nbsp;     * @param mapId resource id
-<i class="no-highlight">170</i>&nbsp;     */
-<i class="no-highlight">171</i>&nbsp;    public static void CreateWorldMap(int mapId) {
-<b class="fc"><i class="no-highlight">172</i>&nbsp;        tryInit();</b>
-<b class="fc"><i class="no-highlight">173</i>&nbsp;        WorldMap map = new WorldMap(mapId);</b>
-<b class="fc"><i class="no-highlight">174</i>&nbsp;        mapGraph = new TileMapGraph(map.getTileMap());</b>
-<i class="no-highlight">175</i>&nbsp;    }
-<i class="no-highlight">176</i>&nbsp;
-<i class="no-highlight">177</i>&nbsp;    /**
-<i class="no-highlight">178</i>&nbsp;     * Creates the college with it&#39;s building for the desired college
-<i class="no-highlight">179</i>&nbsp;     *
-<i class="no-highlight">180</i>&nbsp;     * @param factionId desired faction
-<i class="no-highlight">181</i>&nbsp;     */
-<i class="no-highlight">182</i>&nbsp;    public static void CreateCollege(int factionId) {
-<b class="fc"><i class="no-highlight">183</i>&nbsp;        tryInit();</b>
-<b class="fc"><i class="no-highlight">184</i>&nbsp;        College c = new College(factionId);</b>
-<b class="fc"><i class="no-highlight">185</i>&nbsp;        colleges.add(c);</b>
-<i class="no-highlight">186</i>&nbsp;    }
-<i class="no-highlight">187</i>&nbsp;
-<i class="no-highlight">188</i>&nbsp;    private static void tryInit() {
-<b class="fc"><i class="no-highlight">189</i>&nbsp;        if (!initialized) {</b>
-<b class="nc"><i class="no-highlight">190</i>&nbsp;            Initialize();</b>
-<i class="no-highlight">191</i>&nbsp;        }
-<i class="no-highlight">192</i>&nbsp;    }
-<i class="no-highlight">193</i>&nbsp;
-<i class="no-highlight">194</i>&nbsp;    public static Faction getFaction(int factionId) {
-<b class="fc"><i class="no-highlight">195</i>&nbsp;        tryInit();</b>
-<b class="fc"><i class="no-highlight">196</i>&nbsp;        return factions.get(factionId - 1);</b>
-<i class="no-highlight">197</i>&nbsp;    }
-<i class="no-highlight">198</i>&nbsp;
-<i class="no-highlight">199</i>&nbsp;    /**
-<i class="no-highlight">200</i>&nbsp;     * Gets the setting object from the GameSetting.json
-<i class="no-highlight">201</i>&nbsp;     *
-<i class="no-highlight">202</i>&nbsp;     * @return the JSON representation fo settings
-<i class="no-highlight">203</i>&nbsp;     */
-<i class="no-highlight">204</i>&nbsp;    public static JsonValue getSettings() {
-<b class="fc"><i class="no-highlight">205</i>&nbsp;        tryInit();</b>
-<b class="fc"><i class="no-highlight">206</i>&nbsp;        return settings;</b>
-<i class="no-highlight">207</i>&nbsp;    }
-<i class="no-highlight">208</i>&nbsp;
-<i class="no-highlight">209</i>&nbsp;    public static College getCollege(int factionId) {
-<b class="fc"><i class="no-highlight">210</i>&nbsp;        tryInit();</b>
-<b class="fc"><i class="no-highlight">211</i>&nbsp;        return colleges.get(factionId - 1);</b>
-<i class="no-highlight">212</i>&nbsp;    }
-<i class="no-highlight">213</i>&nbsp;
-<i class="no-highlight">214</i>&nbsp;    /**
-<i class="no-highlight">215</i>&nbsp;     * Utilises the cached cannonballs to fire one
-<i class="no-highlight">216</i>&nbsp;     *
-<i class="no-highlight">217</i>&nbsp;     * @param p   parent
-<i class="no-highlight">218</i>&nbsp;     * @param dir shoot direction
-<i class="no-highlight">219</i>&nbsp;     */
-<i class="no-highlight">220</i>&nbsp;    public static void shoot(Ship p, Vector2 dir) {
-<b class="nc"><i class="no-highlight">221</i>&nbsp;        Vector2 pos = p.getComponent(Transform.class).getPosition().cpy();</b>
-<i class="no-highlight">222</i>&nbsp;        //pos.add(dir.x * TILE_SIZE * 0.5f, dir.y * TILE_SIZE * 0.5f);
-<b class="nc"><i class="no-highlight">223</i>&nbsp;        ballCache.get(currentElement++).fire(pos, dir, p);</b>
-<b class="nc"><i class="no-highlight">224</i>&nbsp;        currentElement %= cacheSize;</b>
-<i class="no-highlight">225</i>&nbsp;    }
-<i class="no-highlight">226</i>&nbsp;
-<i class="no-highlight">227</i>&nbsp;    public static void shoot2(College c, Vector2 dir) {
-<b class="nc"><i class="no-highlight">228</i>&nbsp;        Vector2 pos = c.getComponent(Transform.class).getPosition().cpy();</b>
-<i class="no-highlight">229</i>&nbsp;        //pos.add(dir.x * TILE_SIZE * 0.5f, dir.y * TILE_SIZE * 0.5f);
-<b class="nc"><i class="no-highlight">230</i>&nbsp;        ballCache2.get(currentElement++).fire(pos, dir, c);</b>
-<b class="nc"><i class="no-highlight">231</i>&nbsp;        currentElement %= cacheSize;</b>
-<i class="no-highlight">232</i>&nbsp;    }
-<i class="no-highlight">233</i>&nbsp;
-<i class="no-highlight">234</i>&nbsp;    /**
-<i class="no-highlight">235</i>&nbsp;     * uses a* not sure if it works but i think it does
-<i class="no-highlight">236</i>&nbsp;     *
-<i class="no-highlight">237</i>&nbsp;     * @param loc src
-<i class="no-highlight">238</i>&nbsp;     * @param dst dst
-<i class="no-highlight">239</i>&nbsp;     * @return queue of delta postions
-<i class="no-highlight">240</i>&nbsp;     */
-<i class="no-highlight">241</i>&nbsp;    public static QueueFIFO&lt;Vector2&gt; getPath(Vector2 loc, Vector2 dst) {
-<b class="nc"><i class="no-highlight">242</i>&nbsp;        return mapGraph.findOptimisedPath(loc, dst);</b>
-<i class="no-highlight">243</i>&nbsp;    }
-<i class="no-highlight">244</i>&nbsp;}
+<i class="no-highlight">116</i>&nbsp;    }
+<i class="no-highlight">117</i>&nbsp;
+<i class="no-highlight">118</i>&nbsp;    /**
+<i class="no-highlight">119</i>&nbsp;     * Creates player that belongs the faction with id 1
+<b class="fc"><i class="no-highlight">120</i>&nbsp;     */</b>
+<b class="fc"><i class="no-highlight">121</i>&nbsp;    public static void CreatePlayer() {</b>
+<b class="fc"><i class="no-highlight">122</i>&nbsp;        tryInit();</b>
+<b class="fc"><i class="no-highlight">123</i>&nbsp;        Player p = new Player();</b>
+<b class="fc"><i class="no-highlight">124</i>&nbsp;        p.setFaction(1);</b>
+<b class="fc"><i class="no-highlight">125</i>&nbsp;        ships.add(p);</b>
+<i class="no-highlight">126</i>&nbsp;    }
+<i class="no-highlight">127</i>&nbsp;
+<i class="no-highlight">128</i>&nbsp;    /**
+<i class="no-highlight">129</i>&nbsp;     * Creates monster
+<b class="fc"><i class="no-highlight">130</i>&nbsp;     */</b>
+<b class="fc"><i class="no-highlight">131</i>&nbsp;    public static void CreateMonster() {</b>
+<b class="fc"><i class="no-highlight">132</i>&nbsp;        tryInit();</b>
+<b class="fc"><i class="no-highlight">133</i>&nbsp;        Monster m = new Monster();</b>
+<b class="fc"><i class="no-highlight">134</i>&nbsp;        monsters.add(m);</b>
+<i class="no-highlight">135</i>&nbsp;    }
+<i class="no-highlight">136</i>&nbsp;
+<i class="no-highlight">137</i>&nbsp;    /**
+<i class="no-highlight">138</i>&nbsp;     * Creates weather
+<b class="fc"><i class="no-highlight">139</i>&nbsp;     */</b>
+<b class="fc"><i class="no-highlight">140</i>&nbsp;    public static Weather CreateWeather() {</b>
+<b class="fc"><i class="no-highlight">141</i>&nbsp;        tryInit();</b>
+<b class="fc"><i class="no-highlight">142</i>&nbsp;        Weather e = new Weather();</b>
+<b class="fc"><i class="no-highlight">143</i>&nbsp;        weathers.add(e);</b>
+<b class="fc"><i class="no-highlight">144</i>&nbsp;        return e;</b>
+<i class="no-highlight">145</i>&nbsp;    }
+<i class="no-highlight">146</i>&nbsp;
+<i class="no-highlight">147</i>&nbsp;    /**
+<i class="no-highlight">148</i>&nbsp;     * Creates an NPC ship with the given faction
+<i class="no-highlight">149</i>&nbsp;     *
+<i class="no-highlight">150</i>&nbsp;     * @param factionId desired faction
+<i class="no-highlight">151</i>&nbsp;     * @return the created ship
+<b class="fc"><i class="no-highlight">152</i>&nbsp;     */</b>
+<b class="fc"><i class="no-highlight">153</i>&nbsp;    public static NPCShip CreateNPCShip(int factionId) {</b>
+<b class="fc"><i class="no-highlight">154</i>&nbsp;        tryInit();</b>
+<b class="fc"><i class="no-highlight">155</i>&nbsp;        NPCShip e = new NPCShip();</b>
+<b class="fc"><i class="no-highlight">156</i>&nbsp;        e.setFaction(factionId);</b>
+<b class="fc"><i class="no-highlight">157</i>&nbsp;        ships.add(e);</b>
+<b class="fc"><i class="no-highlight">158</i>&nbsp;        return e;</b>
+<i class="no-highlight">159</i>&nbsp;    }
+<i class="no-highlight">160</i>&nbsp;
+<b class="nc"><i class="no-highlight">161</i>&nbsp;</b>
+<b class="nc"><i class="no-highlight">162</i>&nbsp;    public static void addNPCMyShip(){</b>
+<b class="nc"><i class="no-highlight">163</i>&nbsp;        NPCShip e = new NPCShip();</b>
+<b class="nc"><i class="no-highlight">164</i>&nbsp;        e.setFaction(1);</b>
+<b class="nc"><i class="no-highlight">165</i>&nbsp;        ships.add(e);</b>
+<i class="no-highlight">166</i>&nbsp;    }
+<i class="no-highlight">167</i>&nbsp;
+<i class="no-highlight">168</i>&nbsp;    /**
+<i class="no-highlight">169</i>&nbsp;     * Creates the world map
+<i class="no-highlight">170</i>&nbsp;     *
+<i class="no-highlight">171</i>&nbsp;     * @param mapId resource id
+<b class="fc"><i class="no-highlight">172</i>&nbsp;     */</b>
+<b class="fc"><i class="no-highlight">173</i>&nbsp;    public static void CreateWorldMap(int mapId) {</b>
+<b class="fc"><i class="no-highlight">174</i>&nbsp;        tryInit();</b>
+<b class="fc"><i class="no-highlight">175</i>&nbsp;        WorldMap map = new WorldMap(mapId);</b>
+<b class="fc"><i class="no-highlight">176</i>&nbsp;        mapGraph = new TileMapGraph(map.getTileMap());</b>
+<i class="no-highlight">177</i>&nbsp;    }
+<i class="no-highlight">178</i>&nbsp;
+<i class="no-highlight">179</i>&nbsp;    /**
+<i class="no-highlight">180</i>&nbsp;     * Creates the college with it&#39;s building for the desired college
+<i class="no-highlight">181</i>&nbsp;     *
+<i class="no-highlight">182</i>&nbsp;     * @param factionId desired faction
+<b class="fc"><i class="no-highlight">183</i>&nbsp;     */</b>
+<b class="fc"><i class="no-highlight">184</i>&nbsp;    public static void CreateCollege(int factionId) {</b>
+<b class="fc"><i class="no-highlight">185</i>&nbsp;        tryInit();</b>
+<b class="fc"><i class="no-highlight">186</i>&nbsp;        College c = new College(factionId);</b>
+<b class="fc"><i class="no-highlight">187</i>&nbsp;        colleges.add(c);</b>
+<i class="no-highlight">188</i>&nbsp;    }
+<b class="fc"><i class="no-highlight">189</i>&nbsp;</b>
+<b class="nc"><i class="no-highlight">190</i>&nbsp;    private static void tryInit() {</b>
+<b class="fc"><i class="no-highlight">191</i>&nbsp;        if (!initialized) {</b>
+<b class="nc"><i class="no-highlight">192</i>&nbsp;            Initialize();</b>
+<i class="no-highlight">193</i>&nbsp;        }
+<i class="no-highlight">194</i>&nbsp;    }
+<b class="fc"><i class="no-highlight">195</i>&nbsp;</b>
+<b class="fc"><i class="no-highlight">196</i>&nbsp;    public static Faction getFaction(int factionId) {</b>
+<b class="fc"><i class="no-highlight">197</i>&nbsp;        tryInit();</b>
+<b class="fc"><i class="no-highlight">198</i>&nbsp;        return factions.get(factionId - 1);</b>
+<i class="no-highlight">199</i>&nbsp;    }
+<i class="no-highlight">200</i>&nbsp;
+<i class="no-highlight">201</i>&nbsp;    /**
+<i class="no-highlight">202</i>&nbsp;     * Gets the setting object from the GameSetting.json
+<i class="no-highlight">203</i>&nbsp;     *
+<i class="no-highlight">204</i>&nbsp;     * @return the JSON representation fo settings
+<b class="fc"><i class="no-highlight">205</i>&nbsp;     */</b>
+<b class="fc"><i class="no-highlight">206</i>&nbsp;    public static JsonValue getSettings() {</b>
+<b class="fc"><i class="no-highlight">207</i>&nbsp;        tryInit();</b>
+<b class="fc"><i class="no-highlight">208</i>&nbsp;        return settings;</b>
+<i class="no-highlight">209</i>&nbsp;    }
+<b class="fc"><i class="no-highlight">210</i>&nbsp;</b>
+<b class="fc"><i class="no-highlight">211</i>&nbsp;    public static College getCollege(int factionId) {</b>
+<b class="fc"><i class="no-highlight">212</i>&nbsp;        tryInit();</b>
+<b class="fc"><i class="no-highlight">213</i>&nbsp;        return colleges.get(factionId - 1);</b>
+<i class="no-highlight">214</i>&nbsp;    }
+<i class="no-highlight">215</i>&nbsp;
+<i class="no-highlight">216</i>&nbsp;    /**
+<i class="no-highlight">217</i>&nbsp;     * Utilises the cached cannonballs to fire one
+<i class="no-highlight">218</i>&nbsp;     *
+<i class="no-highlight">219</i>&nbsp;     * @param p   parent
+<i class="no-highlight">220</i>&nbsp;     * @param dir shoot direction
+<b class="nc"><i class="no-highlight">221</i>&nbsp;     */</b>
+<i class="no-highlight">222</i>&nbsp;    public static void shoot(Ship p, Vector2 dir) {
+<b class="nc"><i class="no-highlight">223</i>&nbsp;        Vector2 pos = p.getComponent(Transform.class).getPosition().cpy();</b>
+<b class="nc"><i class="no-highlight">224</i>&nbsp;        //pos.add(dir.x * TILE_SIZE * 0.5f, dir.y * TILE_SIZE * 0.5f);</b>
+<b class="nc"><i class="no-highlight">225</i>&nbsp;        ballCache.get(currentElement++).fire(pos, dir, p);</b>
+<b class="nc"><i class="no-highlight">226</i>&nbsp;        currentElement %= cacheSize;</b>
+<i class="no-highlight">227</i>&nbsp;    }
+<b class="nc"><i class="no-highlight">228</i>&nbsp;    //new</b>
+<i class="no-highlight">229</i>&nbsp;    /**
+<b class="nc"><i class="no-highlight">230</i>&nbsp;     * Utilises the cached cannonballs to fire one</b>
+<b class="nc"><i class="no-highlight">231</i>&nbsp;     *</b>
+<i class="no-highlight">232</i>&nbsp;     * @param c   College that fires
+<i class="no-highlight">233</i>&nbsp;     * @param dir shoot direction
+<i class="no-highlight">234</i>&nbsp;     */
+<i class="no-highlight">235</i>&nbsp;    public static void shoot2(College c, Vector2 dir) {
+<b class="nc"><i class="no-highlight">236</i>&nbsp;        Vector2 pos = c.getComponent(Transform.class).getPosition().cpy();</b>
+<i class="no-highlight">237</i>&nbsp;        //pos.add(dir.x * TILE_SIZE * 0.5f, dir.y * TILE_SIZE * 0.5f);
+<b class="nc"><i class="no-highlight">238</i>&nbsp;        ballCache2.get(currentElement++).fire(pos, dir, c);</b>
+<b class="nc"><i class="no-highlight">239</i>&nbsp;        currentElement %= cacheSize;</b>
+<i class="no-highlight">240</i>&nbsp;    }
+<i class="no-highlight">241</i>&nbsp;
+<b class="nc"><i class="no-highlight">242</i>&nbsp;    /**</b>
+<i class="no-highlight">243</i>&nbsp;     * uses a* not sure if it works but i think it does
+<i class="no-highlight">244</i>&nbsp;     *
+<i class="no-highlight">245</i>&nbsp;     * @param loc src
+<i class="no-highlight">246</i>&nbsp;     * @param dst dst
+<i class="no-highlight">247</i>&nbsp;     * @return queue of delta postions
+<i class="no-highlight">248</i>&nbsp;     */
+<i class="no-highlight">249</i>&nbsp;    public static QueueFIFO&lt;Vector2&gt; getPath(Vector2 loc, Vector2 dst) {
+<b class="nc"><i class="no-highlight">250</i>&nbsp;        return mapGraph.findOptimisedPath(loc, dst);</b>
+<i class="no-highlight">251</i>&nbsp;    }
+<i class="no-highlight">252</i>&nbsp;}
 </div>
 </pre>
 </div>
@@ -343,7 +351,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-05-01 15:41</div>
+    <div style="float:right;">generated on 2022-05-03 11:14</div>
 </div>
 </body>
 </html>

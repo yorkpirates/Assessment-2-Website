@@ -161,7 +161,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 <i class="no-highlight">22</i>&nbsp;import static com.mygdx.utils.Constants.*;
 <i class="no-highlight">23</i>&nbsp;import static com.mygdx.utils.Constants.PHYSICS_TIME_STEP;
 <i class="no-highlight">24</i>&nbsp;
-<i class="no-highlight">25</i>&nbsp;/**
+<i class="no-highlight">25</i>&nbsp;/**NEW
 <i class="no-highlight">26</i>&nbsp; * Contains widgets defining the shop screen.
 <i class="no-highlight">27</i>&nbsp; */
 <i class="no-highlight">28</i>&nbsp;public class ShopScreen extends Page {
@@ -270,13 +270,18 @@ Current scope:     <a href="../../index.html">all classes</a>
 <b class="nc"><i class="no-highlight">131</i>&nbsp;        super.hide();</b>
 <i class="no-highlight">132</i>&nbsp;    }
 <i class="no-highlight">133</i>&nbsp;
-<i class="no-highlight">134</i>&nbsp;    @Override
-<i class="no-highlight">135</i>&nbsp;    public void resize(int width, int height) {
-<b class="nc"><i class="no-highlight">136</i>&nbsp;        super.resize(width, height);</b>
-<b class="nc"><i class="no-highlight">137</i>&nbsp;        Table t = (Table) actors.get(0);</b>
-<b class="nc"><i class="no-highlight">138</i>&nbsp;        t.setBackground(new TextureRegionDrawable(ResourceManager.getTexture(&quot;shopBG.jpg&quot;))); // prevent the bg being stretched</b>
-<i class="no-highlight">139</i>&nbsp;    }
-<i class="no-highlight">140</i>&nbsp;}
+<i class="no-highlight">134</i>&nbsp;    /**
+<i class="no-highlight">135</i>&nbsp;     * Used to resize the background texture to the correct size to fill the window
+<i class="no-highlight">136</i>&nbsp;     * @param width  new dim x width of the screen
+<i class="no-highlight">137</i>&nbsp;     * @param height new dom y height of the screen
+<i class="no-highlight">138</i>&nbsp;     */
+<i class="no-highlight">139</i>&nbsp;    @Override
+<i class="no-highlight">140</i>&nbsp;    public void resize(int width, int height) {
+<b class="nc"><i class="no-highlight">141</i>&nbsp;        super.resize(width, height);</b>
+<b class="nc"><i class="no-highlight">142</i>&nbsp;        Table t = (Table) actors.get(0);</b>
+<b class="nc"><i class="no-highlight">143</i>&nbsp;        t.setBackground(new TextureRegionDrawable(ResourceManager.getTexture(&quot;shopBG.jpg&quot;))); // prevent the bg being stretched</b>
+<i class="no-highlight">144</i>&nbsp;    }
+<i class="no-highlight">145</i>&nbsp;}
 </div>
 </pre>
 </div>
@@ -303,7 +308,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-05-01 15:41</div>
+    <div style="float:right;">generated on 2022-05-03 11:14</div>
 </div>
 </body>
 </html>

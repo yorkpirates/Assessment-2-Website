@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html id="htmlId">
 <head>
-  <title>Coverage Report > BuildingTest</title>
+  <title>Coverage Report > TransformTest</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/highlight-idea.css";
@@ -17,10 +17,10 @@
 <div class="breadCrumbs">
 Current scope:     <a href="../../index.html">all classes</a>
     <span class="separator">|</span>
-    <a href="../index.html">io.team9.game.tests.Entitys</a>
+    <a href="../index.html">io.team9.game.tests.Components</a>
 </div>
 
-<h1>Coverage Summary for Class: BuildingTest (io.team9.game.tests.Entitys)</h1>
+<h1>Coverage Summary for Class: TransformTest (io.team9.game.tests.Components)</h1>
 
 <table class="coverageStats">
 <tr>
@@ -39,7 +39,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 </th>
 </tr>
 <tr>
-  <td class="name">BuildingTest</td>
+  <td class="name">TransformTest</td>
 <td class="coverageStat">
   <span class="percent">
     100%
@@ -61,7 +61,7 @@ Current scope:     <a href="../../index.html">all classes</a>
     100%
   </span>
   <span class="absValue">
-    (17/17)
+    (24/24)
   </span>
 </td>
 </tr>
@@ -73,57 +73,60 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 
 <pre>
-<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;package io.team9.game.tests.Entitys;
+<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;package io.team9.game.tests.Components;
 <i class="no-highlight">2</i>&nbsp;import com.badlogic.gdx.math.Vector2;
-<i class="no-highlight">3</i>&nbsp;import com.mygdx.game.Entitys.Building;
-<i class="no-highlight">4</i>&nbsp;import com.mygdx.game.Entitys.CannonBall;
-<i class="no-highlight">5</i>&nbsp;import com.mygdx.game.Managers.GameManager;
-<i class="no-highlight">6</i>&nbsp;import com.mygdx.game.Managers.PhysicsManager;
-<i class="no-highlight">7</i>&nbsp;import com.mygdx.game.Physics.CollisionInfo;
-<i class="no-highlight">8</i>&nbsp;import io.team9.game.tests.GdxTestRunner;
-<i class="no-highlight">9</i>&nbsp;import org.junit.Test;
-<i class="no-highlight">10</i>&nbsp;import org.junit.runner.RunWith;
-<i class="no-highlight">11</i>&nbsp;
-<i class="no-highlight">12</i>&nbsp;import com.badlogic.gdx.physics.box2d.*;
+<i class="no-highlight">3</i>&nbsp;import com.mygdx.game.Components.Transform;
+<i class="no-highlight">4</i>&nbsp;import com.mygdx.game.Managers.PhysicsManager;
+<i class="no-highlight">5</i>&nbsp;import io.team9.game.tests.GdxTestRunner;
+<i class="no-highlight">6</i>&nbsp;import org.junit.Test;
+<i class="no-highlight">7</i>&nbsp;import org.junit.runner.RunWith;
+<i class="no-highlight">8</i>&nbsp;
+<i class="no-highlight">9</i>&nbsp;import com.badlogic.gdx.physics.box2d.*;
+<i class="no-highlight">10</i>&nbsp;
+<i class="no-highlight">11</i>&nbsp;import java.util.ArrayList;
+<i class="no-highlight">12</i>&nbsp;import java.util.Vector;
 <i class="no-highlight">13</i>&nbsp;
-<i class="no-highlight">14</i>&nbsp;import java.util.ArrayList;
-<i class="no-highlight">15</i>&nbsp;
-<i class="no-highlight">16</i>&nbsp;import static org.junit.Assert.*;
-<i class="no-highlight">17</i>&nbsp;@RunWith(GdxTestRunner.class)
-<b class="fc"><i class="no-highlight">18</i>&nbsp;public class BuildingTest {</b>
-<i class="no-highlight">19</i>&nbsp;
-<i class="no-highlight">20</i>&nbsp;    @Test
-<i class="no-highlight">21</i>&nbsp;    public void CollisionTest(){
-<b class="fc"><i class="no-highlight">22</i>&nbsp;        PhysicsManager.Initialize();</b>
-<b class="fc"><i class="no-highlight">23</i>&nbsp;        GameManager.Initialize();</b>
+<i class="no-highlight">14</i>&nbsp;import static org.junit.Assert.*;
+<i class="no-highlight">15</i>&nbsp;@RunWith(GdxTestRunner.class)
+<b class="fc"><i class="no-highlight">16</i>&nbsp;public class TransformTest {</b>
+<i class="no-highlight">17</i>&nbsp;
+<i class="no-highlight">18</i>&nbsp;    @Test
+<i class="no-highlight">19</i>&nbsp;    public void positionSettingTest(){
+<b class="fc"><i class="no-highlight">20</i>&nbsp;        PhysicsManager.Initialize();</b>
+<b class="fc"><i class="no-highlight">21</i>&nbsp;        Transform transform = new Transform();</b>
+<b class="fc"><i class="no-highlight">22</i>&nbsp;        Vector2 vec = new Vector2();</b>
+<b class="fc"><i class="no-highlight">23</i>&nbsp;        assertEquals(&quot;&quot;,vec,transform.getPosition());</b>
 <i class="no-highlight">24</i>&nbsp;
-<b class="fc"><i class="no-highlight">25</i>&nbsp;        Building building = new Building();</b>
-<i class="no-highlight">26</i>&nbsp;
-<b class="fc"><i class="no-highlight">27</i>&nbsp;        assertTrue(&quot;Buildings should start alive&quot;,building.isAlive());</b>
-<i class="no-highlight">28</i>&nbsp;
-<b class="fc"><i class="no-highlight">29</i>&nbsp;        CannonBall shot = new CannonBall();</b>
-<b class="fc"><i class="no-highlight">30</i>&nbsp;        CollisionInfo info = new CollisionInfo();</b>
-<b class="fc"><i class="no-highlight">31</i>&nbsp;        Vector2 blank = new Vector2();</b>
-<i class="no-highlight">32</i>&nbsp;
-<b class="fc"><i class="no-highlight">33</i>&nbsp;        info.a= shot;</b>
-<b class="fc"><i class="no-highlight">34</i>&nbsp;        info.b=building;</b>
-<b class="fc"><i class="no-highlight">35</i>&nbsp;        building.EnterTrigger(info);</b>
-<i class="no-highlight">36</i>&nbsp;
-<b class="fc"><i class="no-highlight">37</i>&nbsp;        assertFalse(&quot;Building should no longer be alive &quot;,building.isAlive());</b>
-<i class="no-highlight">38</i>&nbsp;
-<i class="no-highlight">39</i>&nbsp;    }
-<i class="no-highlight">40</i>&nbsp;
-<i class="no-highlight">41</i>&nbsp;    @Test
-<i class="no-highlight">42</i>&nbsp;    public void flagTest(){
-<b class="fc"><i class="no-highlight">43</i>&nbsp;        PhysicsManager.Initialize();</b>
-<b class="fc"><i class="no-highlight">44</i>&nbsp;        GameManager.Initialize();</b>
-<i class="no-highlight">45</i>&nbsp;
-<b class="fc"><i class="no-highlight">46</i>&nbsp;        Building flag = new Building(true);</b>
-<b class="fc"><i class="no-highlight">47</i>&nbsp;        flag.destroy();</b>
-<b class="fc"><i class="no-highlight">48</i>&nbsp;        assertTrue(&quot;Flag should never be destroyed&quot;, flag.isAlive());</b>
-<i class="no-highlight">49</i>&nbsp;
-<i class="no-highlight">50</i>&nbsp;    }
-<i class="no-highlight">51</i>&nbsp;}
+<b class="fc"><i class="no-highlight">25</i>&nbsp;        vec.x=5;</b>
+<b class="fc"><i class="no-highlight">26</i>&nbsp;        vec.y=5;</b>
+<b class="fc"><i class="no-highlight">27</i>&nbsp;        transform.setPosition(vec);</b>
+<b class="fc"><i class="no-highlight">28</i>&nbsp;        assertEquals(&quot;Should equal vector&quot;,vec,transform.getPosition());</b>
+<i class="no-highlight">29</i>&nbsp;
+<b class="fc"><i class="no-highlight">30</i>&nbsp;        vec.x=10;</b>
+<b class="fc"><i class="no-highlight">31</i>&nbsp;        vec.y=10;</b>
+<b class="fc"><i class="no-highlight">32</i>&nbsp;        transform.setPosition(10,10);</b>
+<b class="fc"><i class="no-highlight">33</i>&nbsp;        assertEquals(&quot;Should equal vector&quot;,vec,transform.getPosition());</b>
+<i class="no-highlight">34</i>&nbsp;
+<b class="fc"><i class="no-highlight">35</i>&nbsp;        vec.x=5;</b>
+<b class="fc"><i class="no-highlight">36</i>&nbsp;        vec.y=5;</b>
+<b class="fc"><i class="no-highlight">37</i>&nbsp;        transform.setPosition(vec,false);</b>
+<b class="fc"><i class="no-highlight">38</i>&nbsp;        assertEquals(&quot;Should equal vector&quot;,vec,transform.getPosition());</b>
+<i class="no-highlight">39</i>&nbsp;
+<b class="fc"><i class="no-highlight">40</i>&nbsp;        vec.x=10;</b>
+<b class="fc"><i class="no-highlight">41</i>&nbsp;        vec.y=10;</b>
+<b class="fc"><i class="no-highlight">42</i>&nbsp;        transform.setPosition(10,10,false);</b>
+<b class="fc"><i class="no-highlight">43</i>&nbsp;        assertEquals(&quot;Should equal vector&quot;,vec,transform.getPosition());</b>
+<i class="no-highlight">44</i>&nbsp;    }
+<i class="no-highlight">45</i>&nbsp;    @Test
+<i class="no-highlight">46</i>&nbsp;    public void newLocationTest(){
+<b class="fc"><i class="no-highlight">47</i>&nbsp;        PhysicsManager.Initialize();</b>
+<b class="fc"><i class="no-highlight">48</i>&nbsp;        Transform transform = new Transform();</b>
+<b class="fc"><i class="no-highlight">49</i>&nbsp;        assertEquals(transform.getPosition(),transform.newLocation().getPosition());</b>
+<i class="no-highlight">50</i>&nbsp;
+<i class="no-highlight">51</i>&nbsp;    }
+<i class="no-highlight">52</i>&nbsp;
+<i class="no-highlight">53</i>&nbsp;
+<i class="no-highlight">54</i>&nbsp;}
 </div>
 </pre>
 </div>
@@ -150,7 +153,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-05-01 15:41</div>
+    <div style="float:right;">generated on 2022-05-03 11:14</div>
 </div>
 </body>
 </html>
